@@ -1,0 +1,51 @@
+{% extends 'manager/login_layout.html' %}
+{% load static %}
+{% block body %}
+<div class="authentication">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-10 mx-auto text-center">
+                <form action="{% url 'manager dashboard' %}" method="post" class="card auth_form myForm" novalidate>
+                    {% csrf_token %}
+                    <div class="header">
+                        <img class="logo" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logos/armlogi-logo-removebg-preview.svg' %}" alt="{{site_name}} logo">
+                    </div>
+                    <div class="body">
+                        <label for=""class="float-left">Username</label>
+                        <div class="form-group input-group mb-3">
+                            <input type="text" class="form-control"  name="username" placeholder="Username or Email">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="text-light zmdi zmdi-account-circle"></i></span>
+                            </div>
+                            <div class="feedback"></div>
+                        </div>
+                        <label for=""class="float-left">Password</label>
+                        <div class="form-group input-group mb-3">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                            <div class="input-group-append">                                
+                                <span class="input-group-text"><i class="text-light zmdi zmdi-lock"></i></span>
+                            </div>
+                            <div class="feedback"></div>                            
+                        </div>
+                        <div class="checkbox">
+                            <input id="remember_me" name="remember" type="checkbox">
+                            <label for="remember_me" style="cursor:#fff">Remember Me</label>
+                        </div>
+                        <button class="btn btn-primary btn-block waves-effect waves-light auth-btn">
+                            <span></span>
+                            <span>SIGN IN</span>
+                        </button>
+                    </div>
+                    <div class="mt-2 footer text-center">
+                        <p>Forgotten password? <a href="{% url 'reset_password' %}">reset here</a></p>                    
+                    </div>
+                </form>
+                <div class="copyright text-center">
+                    <span>&copy; <script>document.write(new Date().getFullYear())</script>,</span>
+                    <span><a class="page-refresher" href="{% url 'home' %}">{{site_name}}</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}

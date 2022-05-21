@@ -1,0 +1,35 @@
+{% extends 'manager/errors_layout.html' %}
+{% load static %}
+{% block body %}
+<div class="authentication">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <form class="card auth_form">
+                    <div class="header">
+                        <img class="logo"  src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logo.svg' %}" alt="">
+                        <h5>Error 400</h5>
+                        <span>Bad Request</span>
+                    </div>
+                    <div class="body">
+                        <a href="{% url 'home' %}" class="page-refresher btn btn-primary btn-block waves-effect waves-light">GO TO HOMEPAGE</a>                        
+                        <div class="signin_with mt-3">
+                            <a href="javascript:void(0);" class="link">Need Help?</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="copyright text-center">
+                    &copy;
+                    <script>document.write(new Date().getFullYear())</script>,
+                    <span><a href="{% url 'home' %}"> {{site_name}} </a></span>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-12">
+                <div class="card">
+                    <img  src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/signin.svg' %}" alt="500"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

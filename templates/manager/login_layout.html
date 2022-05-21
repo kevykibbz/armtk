@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js " lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="copyright" content="Legit Crew, https://www.devme.com/">
+    <title>{% if obj.site_name %} {{obj.site_name}}  {% else %} {{site_name}} {% endif %} | {{title}}</title>
+    <meta name="description" content="{{obj.description}}">
+    <meta name="author" content="{{designer_name}}">
+    <meta name="theme-color" content="{{obj.theme_color}}">
+    <meta name="msapplication-navbutton-color" content="{{obj.theme_color}}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="{{obj.theme_color}}">
+    <meta name="keywords" content="{{obj.key_words}}">
+    <meta property="og:site_name" content="{{obj.site_name}}">
+    <meta property="og:url" content="{{obj.site_url}}">
+    <meta http-equiv="Content-type" content="text/html;charset:utf-8">
+    <meta property="og:type" content="website"> 
+    <meta property="og:type" content="website"> 
+    <meta property="twitter:site" content="https://twitter.com/Kevin36285655">
+    <meta property="twitter:title" content="@Kevin36285655">
+    <meta property="twitter:image" content="https://twitter.com/Kevin36285655/photo">
+    <meta property="twitter:description" content="Life's Simple.">
+    <meta property="twitter:text:title" content="Life's Simple.">
+    <meta property="og:title" content="{{obj.site_name}} | {{title}}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:description" content="{{obj.description}}">
+    <meta property="og:image" content="{% static 'assets/images/favlogo.png' %}">
+    <meta name="apple-mobile-web-app-title" content="{{obj.site_name}}">
+    <meta name="application-name" content="{{obj.site_name}}">
+    <meta name="msapplication-TileColor" content="{{obj.theme_color}}">
+    <meta name="msapplication-config" content="{% static 'admino/assets/images/logos/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="{% static 'admino/assets/images/logos/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'admino/assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admino/assets/css/style.min.css' %}"> 
+    <link rel="stylesheet" href="{% static 'admino/assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'admino/assets/css/login_custom.css' %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static 'admino/assets/css/custom.css' %}" type="text/css" media="all" />
+    <style>
+      .mainer
+      {
+          background-image: url('{% static "admino/assets/images/bg.png" %}') !important;
+          background-repeat:no-repeat !important;
+          background-position: center !important;
+          background-size: cover !important;
+      }
+    </style>
+</head>
+<body class="theme-blush mainer" onload="load()">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper placeholder">
+      <div class="loader">
+          <div class="m-t-30"><img class="zmdi-hc-spin" src="{% static 'admino/assets/images/loader.svg' %}" width="48" height="48" alt="{{site_name}}"></div>
+          <p>Please wait...</p>
+      </div>
+    </div>
+    <div class="main-display " style="display:none">
+      {% block body %}
+
+      {% endblock %}
+    </div>
+    <script src="{% static 'admino/assets/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'admino/assets/js/libscripts.bundle.js' %}"></script>
+    <script src="{% static 'admino/assets/js/vendorscripts.bundle.js' %}"></script>
+    <script src="{% static 'admino/assets/js/login_custom.js' %}"></script>
+</body>
+</html>

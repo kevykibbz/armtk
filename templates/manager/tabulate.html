@@ -1,0 +1,299 @@
+{% extends 'manager/account_layout.html' %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+<section class="content">
+    <div class="">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Tabulate order | {{editor.ordername}}</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
+                        <li class="breadcrumb-item active">Tabulate order</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class=" col-lg-5 col-md-6 col-sm-12 ">                
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                    <a  href="{% url 'order summary'%}" class="btn btn-info btn-icon float-right " data-toggle="tooltip" title="go back" type="button"><i class="zmdi zmdi-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card position-relative">
+                        <div class="load-overlay users-overlay" style="display:none">
+                            <span class="overlay-close btn-remove" title="close overlay"><i class="fa fa-close"></i></span>
+                            <div class="wrapper-overlay">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="loader-container">
+                                        <div class="innerloader">
+                                            <svg class="circular" viewBox="25 25 50 50">
+                                            <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header">
+                            <h2><strong>|Tabulate</strong> info</h2>
+                        </div>
+                        <div class="body">
+                            <form action="{% url 'edit order' id=form_id %}" method="post" class="spreadsheetForm">
+                                {% csrf_token %}
+                                <div id="wizard_horizontal">
+                                    <h2>First Step</h2>
+                                    <section>
+                                       <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Status</label>
+                                                    {{form.status}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Date</label>
+                                                    {{form.date}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Pierpass</label>
+                                                    {{form.pierpass}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">MBL</label>
+                                                    {{form.mbl}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">HBL</label>
+                                                    {{form.hbl}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Customer</label>
+                                                    {{form.customer}}
+                                                    <datalist id="customerlist">
+                                                    {% for item in customerlist %}
+                                                        <option value="{{item.customer}}">
+                                                    {% endfor %}
+                                                    </datalist>
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Container</label>
+                                                    {{form.container}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                       </div>
+                                    </section>
+                                    <h2>Second Step</h2>
+                                    <section>
+                                       <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Drop city</label>
+                                                    {{form.drop_city}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Discharge port</label>
+                                                    {{form.discharge_port}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Port eta</label>
+                                                    {{form.port_eta}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">LFD</label>
+                                                    {{form.lfd}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Trucking</label>
+                                                    {{form.trucking}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">East deliver</label>
+                                                    {{form.east_deliver}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Appointment</label>
+                                                    {{form.appointment}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Actual deliver</label>
+                                                    {{form.actual_deliver}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                       </div>
+                                    </section>
+                                    <h2>Third Step</h2>
+                                    <section>
+                                       <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Empty chassis</label>
+                                                    {{form.chasis}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Demurrage</label>
+                                                    {{form.demurrage}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Invoice sent</label>
+                                                    {{form.invoice_sent}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Invoice</label>
+                                                    {{form.invoice}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Invoice $</label>
+                                                    {{form.invoice_dolla}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">A/R</label>
+                                                    {{form.a_rrry}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">A/P</label>
+                                                    {{form.a_ppy}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Customer email</label>
+                                                    {{form.customer_email}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                       </div>
+                                    </section>
+                                    <h2>Fourth Step</h2>
+                                    <section>
+                                       <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Notify</label>
+                                                    {{form.notify}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Acct email</label>
+                                                    {{form.acct_email}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Driver</label>
+                                                    {{form.driver}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Empty return</label>
+                                                    {{form.empty_return}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Type</label>
+                                                    {{form.type}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="">Seal</label>
+                                                    {{form.seal}}
+                                                    <div class="feedback"></div>
+                                                </div>
+                                            </div>
+                                       </div>
+                                    </section>
+                                </div>
+                            </form>
+                            <div class="wrapper">
+                                <header class="upload-header">File Uploader</header>
+                                <form  class="upload-form" action="{% url 'file upload' id=form_id %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input class="file-input" name="media" type="file" hidden>
+                                  <i class="zmdi zmdi-cloud-upload"></i>
+                                  <p><i class="zmdi zmdi-attachment-alt"></i> Browse File to Upload</p>
+                                </form>
+                                <section class="sec progress-area "></section>
+                                <section class="sec uploaded-area"></section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

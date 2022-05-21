@@ -1,0 +1,157 @@
+{% extends 'manager/account_layout.html' %}
+{% load static %}
+{% block body %}
+<section class="content">
+    <div class="">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Add new user</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
+                        <li class="breadcrumb-item active">New user </li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">                
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-12">
+                    <div class="imagecard card mcard_3 position-relative">
+                        <div class="load-overlay users-overlay" style="display:none">
+                            <span class="overlay-close btn-remove" title="close overlay"><i class="fa fa-close"></i></span>
+                            <div class="wrapper-overlay">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="loader-container">
+                                        <div class="innerloader">
+                                            <svg class="circular" viewBox="25 25 50 50">
+                                            <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <a class="mb-2 getprofilepic" href="javascript:void(0)"><img src="{% static 'admino/assets/images/loader.svg' %}" data-src="{{user.extendedauthuser.profile_pic.url}}" width="180" class="img-fluid rounded-circle shadow user-image" alt="profile-image"></a>
+                            <br>
+                            <p style="margin-top:30px">Provide profile picture</p>
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-primary getprofilepic"><i class="zmdi zmdi-upload"></i> Choose picture</button>
+                            </div>                      
+                        </div>
+                    </div>                  
+                </div>
+                <div class="col-lg-5 col-md-12">
+                    <div class="card position-relative">
+                        <div class="header">
+                            <h2><strong>|User</strong> Settings</h2>
+                        </div>
+                        <div class="load-overlay users-overlay" style="display:none">
+                            <span class="overlay-close btn-remove" title="close overlay"><i class="fa fa-close"></i></span>
+                            <div class="wrapper-overlay">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="loader-container">
+                                        <div class="innerloader">
+                                            <svg class="circular" viewBox="25 25 50 50">
+                                            <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <form action="{% url 'new user' %}" method="post" class="regForm" novalidate>
+                                {% csrf_token %}
+                                {{eform.profile_pic}}
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label class="text-left" for="">First name <span class="text-danger">*</span></label>
+                                            {{form.first_name}}
+                                            <div class="feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="">Last name <span class="text-danger">*</span></label>
+                                            {{form.last_name}}
+                                            <div class="feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="">Phone <span class="text-danger">*</span></label>
+                                            {{eform.phone}}
+                                            <div class="feedback"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-right more">
+                                        <a href="#showMore" onclick="$('.less').show();$(this).parent().hide()" role="button" aria-expanded="false" aria-controls="showMore" class="text-info" data-toggle="collapse" style="cursor:pointer"><i class="fa fa-angle-down"></i> show more</a>                                   
+                                    </div>
+                                    <div class="collapse" id="showMore">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Email <span class="text-danger">*</span></label>
+                                                {{form.email}}
+                                                <div class="feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="">Username <span class="text-danger">*</span></label>
+                                                {{form.username}}
+                                                <div class="feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="">Role <span class="text-danger">*</span></label>
+                                                {{eform.role}}
+                                                <div class="feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="">Password <span class="text-danger">*</span></label>
+                                                {{form.password1}}
+                                                <div class="feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="">Confirm password <span class="text-danger">*</span></label>
+                                                {{form.password2}}
+                                                <div class="feedback"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center">
+                                            <button type="submit" class="btn btn-primary submitBtn"><span></span><span>Save Changes</span></button>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="text-right less" style="display:none">
+                                                <a href="#showMore"  onclick="$('.more').show();$(this).parent().hide()"role="button" aria-expanded="false" aria-controls="showMore" class="text-info" data-toggle="collapse" style="cursor:pointer"><i class="fa fa-angle-up"></i> show less</a>                                   
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

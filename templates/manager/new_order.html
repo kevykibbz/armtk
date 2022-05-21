@@ -1,0 +1,64 @@
+{% extends 'manager/account_layout.html' %}
+{% load static %}
+{% block body %}
+<section class="content">
+    <div class="">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Create new order</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
+                        <li class="breadcrumb-item active">Create new order</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">                
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-5 mx-auto">
+                    <div class="card position-relative">
+                        <div class="load-overlay users-overlay" style="display:none">
+                            <span class="overlay-close btn-remove" title="close overlay"><i class="fa fa-close"></i></span>
+                            <div class="wrapper-overlay">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="loader-container">
+                                        <div class="innerloader">
+                                            <svg class="circular" viewBox="25 25 50 50">
+                                            <circle class="path" cx="50" cy="50" r="10" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+                                            </svg>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="header">
+                            <h2><strong>|New</strong> order</h2>
+                        </div>
+                        <div class="body">
+                           <form action="{% url 'userorder' %}" method="post" class="orderForm" novalidate>
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label class="text-left" for="">Order name <span class="text-danger">*</span></label>
+                                    {{form.ordername}}
+                                    <div class="feedback"></div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary"><span></span><span>Save Changes</span></button>
+                                </div>
+                           </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

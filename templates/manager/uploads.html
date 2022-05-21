@@ -1,0 +1,72 @@
+{% extends 'manager/account_layout.html' %}
+{% load static %}
+{% load humanize %}
+{% block body %}
+<section class="content">
+    <div class="">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>View uploaded files</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
+                        <li class="breadcrumb-item active">View uploaded files</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class=" col-lg-5 col-md-6 col-sm-12 ">                
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                    <a  href="{% url 'order summary' %}" class="btn btn-info btn-icon float-right " type="button"><i class="zmdi zmdi-plus"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row clearfix table-results">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4><strong>|File</strong> Uploads {{count|intcomma}}</h4>
+                        </div>
+                        <div class="body"> 
+                            <div class="table-responsive table-results">
+                                <table class="table table-bordered table-striped table-hover dataTable js-exportable  c_table theme-color ">
+                                    <thead>
+                                        <tr>                                       
+                                            <th>#</th>
+                                            <th>Name</th>                                        
+                                            <th>Category</th>                                        
+                                            <th>Created Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if files %}
+                                            {% for file in files %}
+                                                <tr id="id_{{file.id}}">
+                                                    <td>{{forloop.counter}}</td>
+                                                    <td><i class="zmdi zmdi-attachment-alt"></i> {{file.media}}</td>
+                                                    <td class="text-info">{{file.ordername}}</td>
+                                                    <td>{{file.uploaded_on}}</td>
+                                                    <td>
+                                                        <a  href="{{file.media.url}}" class="btn btn-success btn-icon " type="button" download><i class="zmdi zmdi-cloud-download"></i></a>
+                                                        <a  data-host="{% url 'user file uploads' %}" href="{% url 'user file uploads delete' id=file.id %}"  class="del-data btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
+                                                    </td>           
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="4" class="text-center">
+                                                <p class="text-info"><i class="zmdi zmdi-alert-triangle"></i> No uploads found</p>
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>  
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
