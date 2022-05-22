@@ -17,7 +17,7 @@ SECRET_KEY =env('SECRET_KEY')
 DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.43.253']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-13-232-224-131.ap-south-1.compute.amazonaws.com','0.0.0.0']
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -32,6 +32,7 @@ AUTHENTICATION_BACKENDS = [
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'whitenoise.runserver_nostatic',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -55,6 +56,7 @@ SITE_ID = 2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,19 +98,26 @@ WSGI_APPLICATION = 'saas.wsgi.application'
 # }
 
 DATABASES = {
-   'default': 
-            {
-                'ENGINE': 'mysql.connector.django',
-                'NAME':env('DATABASE_NAME'),
-                'USER':env('DATABASE_USER'),
-                'PASSWORD':env('DATABASE_PASSWORD'),
-                'PORT':env('DATABASE_PORT'),
-                'OPTIONS':
-                {
-                    'autocommit':True,
-                },
-            }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME':env('DATABASE_NAME'),
+    }
 }
+
+# DATABASES = {
+#    'default': 
+#             {
+#                 'ENGINE': 'mysql.connector.django',
+#                 'NAME':env('DATABASE_NAME'),
+#                 'USER':env('DATABASE_USER'),
+#                 'PASSWORD':env('DATABASE_PASSWORD'),
+#                 'PORT':env('DATABASE_PORT'),
+#                 'OPTIONS':
+#                 {
+#                     'autocommit':True,
+#                 },
+#             }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -151,7 +160,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -161,9 +170,9 @@ USE_TZ = True
 
 
 #login
-LOGIN_URL='/armlogi/'
-LOGIN_REDIRECT_URL='/armlogi/dashboard/'
-LOGOUT_REDIRECT_URL='/armlogi/'
+LOGIN_URL='/'
+LOGIN_REDIRECT_URL='/dashboard/'
+LOGOUT_REDIRECT_URL='/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 

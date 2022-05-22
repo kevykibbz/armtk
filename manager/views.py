@@ -70,7 +70,7 @@ class Dashboard(View):
                 return JsonResponse({'valid':False,'form_errors':form_errors},content_type="application/json")
 
 
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def home(request):
     obj=SiteConstants.objects.all()[0]
     users_count=User.objects.count()
@@ -93,10 +93,10 @@ def home(request):
 #logout
 def user_logout(request):
     logout(request)
-    return redirect('/armlogi/')
+    return redirect('/')
 
 #newUser
-@method_decorator(login_required(login_url='/armlogi/'),name='dispatch')
+@method_decorator(login_required(login_url='/'),name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['admins']),name='dispatch')
 class newUser(View):
     def get(self,request):
@@ -170,7 +170,7 @@ class newUser(View):
                     return JsonResponse({'valid':False,'uform_errors':uform.errors,'eform_errors':eform.errors},content_type="application/json")
 
 #viewUsers
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def viewUsers(request):
     obj=SiteConstants.objects.all()[0]
@@ -188,7 +188,7 @@ def viewUsers(request):
     return render(request,'manager/view_users.html',context=data)
 
 #edit user
-@method_decorator(login_required(login_url='/armlogi/'),name='dispatch')
+@method_decorator(login_required(login_url='/'),name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['admins']),name='dispatch')
 class EditUser(View):
     def get(self,request,id):
@@ -217,7 +217,7 @@ class EditUser(View):
             return JsonResponse({'valid':False,'uform_errors':form.errors,'eform_errors':eform.errors,},content_type='application/json')
 
 #delete user
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def deleteUser(request,id):
     if request.is_ajax():
@@ -230,7 +230,7 @@ def deleteUser(request,id):
 
 
 #ProfileView
-@method_decorator(login_required(login_url='/armlogi/'),name='dispatch')
+@method_decorator(login_required(login_url='/'),name='dispatch')
 class ProfileView(View):
     def get(self,request,username):
         obj=SiteConstants.objects.all()[0]
@@ -264,7 +264,7 @@ class ProfileView(View):
 
 
 #passwordChange
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def passwordChange(request):
     if request.method=='POST' and request.is_ajax():
         passform=UserPasswordChangeForm(request.POST or None,instance=request.user)
@@ -278,7 +278,7 @@ def passwordChange(request):
             return JsonResponse({'valid':False,'passform_errors':passform.errors},content_type='application/json')
 
 #NewOrder
-@method_decorator(login_required(login_url='/armlogi/'),name='dispatch')
+@method_decorator(login_required(login_url='/'),name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['admins','primary']),name='dispatch')
 class UserNewOrder(View):
     def get(self,request):
@@ -303,7 +303,7 @@ class UserNewOrder(View):
 
 
 #view orders
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def viewOrders(request):
     obj=SiteConstants.objects.all()[0]
     data=Oders.objects.all().order_by('-ordername_id')
@@ -320,7 +320,7 @@ def viewOrders(request):
     return render(request,'manager/view_order.html',context=data)
 
 #editMainOrder
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def editMainOrder(request,id):
     data=Oders.objects.get(ordername_id=id)
@@ -334,7 +334,7 @@ def editMainOrder(request,id):
 
 
 #editOrder
-@method_decorator(login_required(login_url='/armlogi/'),name='dispatch')
+@method_decorator(login_required(login_url='/'),name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['admins','primary','secondary']),name='dispatch')
 class EditOrder(View):
     def get(self,request,id):
@@ -363,7 +363,7 @@ class EditOrder(View):
             return JsonResponse({'valid':False,'form_errors':form.errors},content_type='application/json')
 
 
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def viewOrder(request,id):
     obj=SiteConstants.objects.all()[0]
     data=Oders.objects.all().order_by('-id')
@@ -381,7 +381,7 @@ def viewOrder(request,id):
 
 
 #deleteOrder
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def deleteOrder(request,id):
     if request.is_ajax():
@@ -393,7 +393,7 @@ def deleteOrder(request,id):
             return JsonResponse({'valid':True,'message':'Order does not exist'},content_type='application/json')
 
 #tabulateOrder
-@method_decorator(login_required(login_url='/armlogi/'),name='dispatch')
+@method_decorator(login_required(login_url='/'),name='dispatch')
 @method_decorator(allowed_users(allowed_roles=['admins','primary','secondary']),name='dispatch')
 class TabulateOrder(View):
     def get(self,request,id):
@@ -402,13 +402,15 @@ class TabulateOrder(View):
             order=OrderFields.objects.get(id__exact=id)
             orders=Oders.objects.get(ordername_id__exact=order.order_id)
             form=OrderFieldsForm()
+            customers=OrderFields.objects.all()
             data={
                 'title':f'Tabulate order | {orders.ordername}',
                 'obj':obj,
                 'data':request.user,
                 'editor':orders,
                 'form':form,
-                'form_id':id
+                'form_id':id,
+                'customers':customers
             }
             return render(request,'manager/new_tabulate.html',context=data)
         except User.DoesNotExist:
@@ -424,7 +426,7 @@ class TabulateOrder(View):
             return JsonResponse({'valid':False,'form_errors':form.errors},content_type='application/json')
 
 #orderSummary
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def orderSummary(request):
     obj=SiteConstants.objects.all()[0]
     orders=OrderFields.objects.all().order_by('-id')
@@ -443,7 +445,7 @@ def orderSummary(request):
     return render(request,'manager/order_summary.html',context=data)
 
 #deleteSingleItem
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 @allowed_users(allowed_roles=['admins','primary','secondary'])
 def deleteSingleItem(request,id):
    if request.is_ajax():
@@ -456,7 +458,7 @@ def deleteSingleItem(request,id):
 
 
 #handleUpload
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def handleUpload(request,id):
     if request.method == 'POST':
         ob=OrderFields.objects.get(id__exact=id)
@@ -470,7 +472,7 @@ def handleUpload(request,id):
 
 
 #UserUploads
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def UserUploads(request):
     obj=SiteConstants.objects.all()[0]
@@ -489,7 +491,7 @@ def UserUploads(request):
 
 
 #UserUploadsDelete
-@login_required(login_url='/armlogi/')
+@login_required(login_url='/')
 def UserUploadsDelete(request,id):
     if request.is_ajax():
         try:

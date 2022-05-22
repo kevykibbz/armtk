@@ -430,7 +430,7 @@ $(document).on('submit','.spreadsheetForm',function()
             $('.small-model').modal({show:true});
             $('.small-model').find('.modal-title').text('Success');
             $('.small-model').find('.modal-body').html('<div class="text-success text-center"><i class="fa fa-check-circle"></i> Data saved successfully.</div>');
-           window.location='/armlogi/order/summary/';
+           window.location='/order/summary/';
           }
         else
         {
@@ -491,7 +491,7 @@ $(document).on('submit','.orderForm',function()
             $('.small-model').modal({show:true});
             $('.small-model').find('.modal-title').text('Success');
             $('.small-model').find('.modal-body').html('<div class="text-success text-center"><i class="fa fa-check-circle"></i> Data saved successfully.</div>');
-            window.location='/armlogi/tabulate/order/'+callback.order_id+'/';
+            window.location='/tabulate/order/'+callback.order_id+'/';
           }
         else
         {

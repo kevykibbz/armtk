@@ -22,11 +22,11 @@
         <div class="container-fluid">
             <div class="row clearfix">
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card widget_2 big_icon traffic">
+                    <div class="card widget_2 big_icon ">
                         <div class="body">
                             <h6>Users</h6>
                             <h2>{{users_count|intcomma}}<small class="info"></small></h2>
-                            <small>2% higher than last month</small>
+                            <small>Total users available</small>
                             <div class="progress">
                                 <div class="progress-bar l-amber" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
                             </div>
@@ -34,11 +34,11 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card widget_2 big_icon sales">
+                    <div class="card widget_2 big_icon ">
                         <div class="body">
                             <h6>Cancelled pickups</h6>
                             <h2>{{cancelled_orders|intcomma}}<small class="info"></small></h2>
-                            <small>6% higher than last month</small>
+                            <small>Total cancelled pickups</small>
                             <div class="progress">
                                 <div class="progress-bar l-blue" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="width: 38%;"></div>
                             </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card widget_2 big_icon email">
+                    <div class="card widget_2 big_icon ">
                         <div class="body">
                             <h6>Completed orders</h6>
                             <h2>{{completed_orders|intcomma}}<small class="info"></small></h2>
@@ -58,11 +58,11 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card widget_2 big_icon domains">
+                    <div class="card widget_2 big_icon ">
                         <div class="body">
                             <h6>Orders</h6>
                             <h2>{{orders_count|intcomma}}<small class="info"></small></h2>
-                            <small>Total Registered Domain</small>
+                            <small>Total placed orders</small>
                             <div class="progress">
                                 <div class="progress-bar l-green" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100" style="width: 89%;"></div>
                             </div>
@@ -81,7 +81,6 @@
                                 <thead>
                                     <tr>                                       
                                         <th>#</th>
-                                        <th>id</th>
                                         <th>Load</th>
                                         <th>Status</th>
                                         <th>Date</th>                                        
@@ -166,17 +165,17 @@
                                         <td>{% if item.chasis %}{{item.chasis}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.demurrage %}{{item.demurrage}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.invoice_sent %}{{item.invoice_sent}}{% else %} No data {% endif %}</td>
-                                        <td>{% if item.invoice %}{{item.invoice}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.invoice %}{{item.invoice}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.invoice_dolla %}{{item.invoice_dolla}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.a_rrry %}{{item.a_rrry}}{% else %} No data {% endif %}</td>
-                                        <td>{% if item.a_ppy %}{{item.a_ppy}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.a_ppy %}{{item.a_ppy}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.customer_email %}{{item.customer_email}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.notify %}{{item.notify }}{% else %} No data {% endif %}</td>
                                         <td>{% if item.acct_email %}{{item.acct_email}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.created_at %}{{item.created_at}}{% else %} No data {% endif %}</td>
                                          <td>
                                             {% if item.media %}
-                                                <a href="{{item.media.url}}" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
+                                                <a href="{{item.media.url}}" target="_blank" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
                                                 <a  href="{{item.media.url}}" data-toggle="tooltip" title="Download file" class="btn btn-outline-success  btn-icon" download><i class="zmdi zmdi-download"></i></a>
                                             {% else %}
                                                 No file found
@@ -210,3 +209,4 @@
     </div>
 </section>
 {% endblock %}
+

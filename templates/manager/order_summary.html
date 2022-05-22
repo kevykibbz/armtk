@@ -118,17 +118,17 @@
                                         <td>{% if item.chasis %}{{item.chasis}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.demurrage %}{{item.demurrage}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.invoice_sent %}{{item.invoice_sent}}{% else %} No data {% endif %}</td>
-                                        <td>{% if item.invoice %}{{item.invoice}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.invoice %}{{item.invoice}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.invoice_dolla %}{{item.invoice_dolla}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.a_rrry %}{{item.a_rrry}}{% else %} No data {% endif %}</td>
-                                        <td>{% if item.a_ppy %}{{item.a_ppy}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.a_ppy %}{{item.a_ppy}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.customer_email %}{{item.customer_email}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.notify %}{{item.notify }}{% else %} No data {% endif %}</td>
                                         <td>{% if item.acct_email %}{{item.acct_email}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.created_at %}{{item.created_at}}{% else %} No data {% endif %}</td>
                                         <td>
                                             {% if item.media %}
-                                                <a href="{{item.media.url}}" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
+                                                <a href="{{item.media.url}}"  target="_blank" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
                                                 <a  href="{{item.media.url}}" data-toggle="tooltip" title="Download file" class="btn btn-outline-success btn-icon" download><i class="zmdi zmdi-download"></i></a>
                                             {% else %}
                                                 No file found

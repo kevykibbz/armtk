@@ -26,13 +26,13 @@
     <meta property="og:title" content="{{obj.site_name}} | {{title}}">
     <meta property="og:locale" content="en_US">
     <meta property="og:description" content="{{obj.description}}">
-    <meta property="og:image" content="{% static 'assets/images/favlogo.png' %}">
+    <meta property="og:image" content="{% static 'admino/assets/images/logos/logo.jpg' %}">
     <meta name="apple-mobile-web-app-title" content="{{obj.site_name}}">
     <meta name="application-name" content="{{obj.site_name}}">
     <meta name="msapplication-TileColor" content="{{obj.theme_color}}">
     <meta name="msapplication-config" content="{% static 'admino/assets/images/logos/browserconfig.xml' %}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="{% static 'admino/assets/images/logos/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'admino/assets/images/logos/logo.jpg' %}" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'admino/assets/images/logos/favicon-180x180.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'admino/assets/images/logos/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'admino/assets/images/logos/favicon-16x16.ico' %}">
@@ -146,11 +146,17 @@
                                     <p class="mb-0">Order summary</p>
                                 </a>
                             </li>
+                            <li>
+                                <a href="{% url 'user file uploads' %}">
+                                    <div class="icon-circle mb-2 bg-blue"><i class="zmdi zmdi-attachment-alt"></i></div>
+                                    <p class="mb-0">Uploads</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
+            <li><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings"></i></a></li>
             <li><a href="{% url 'logout' %}" class="mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i></a></li>
         </ul>
     </div>
@@ -160,8 +166,8 @@
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
             <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a  href="{% url 'home' %}" style="margin-left:0 !important;">
-                <img src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logos/armlogi-logo-removebg-preview.svg' %}" width="200" alt="{{site_name}}">
+            <a  href="{% url 'home' %}" style="margin-left:-20px !important;">
+                <img {% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logos/armlogi-logo-removebg-preview.svg' %}" width="200" alt="{{site_name}}">
             </a>
         </div>
         <div class="menu">
@@ -200,7 +206,10 @@
                         {% endif %}
                     </ul>
                 </li>
-                <li class="d-md-none d-block"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings zmdi-hc-spin"></i><span>Settings</span></a></li>
+                {% if  data.is_superuser %}
+                    <li class=""><a href="{% url 'user file uploads' %}"><i class="zmdi zmdi-attachment-alt"></i><span>Uploads</span></a></li>
+                {% endif %}
+                <li class="d-md-none d-block"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings "></i><span>Settings</span></a></li>
                 <li class="d-md-none d-block"><a href="{% url 'logout' %}" class="menu-toggle mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i><span>Logout</span></a></li>
                  <li>
                 <div class="progress-container progress-primary " style="margin-top:10%;">

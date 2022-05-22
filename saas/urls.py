@@ -5,7 +5,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('installation/',include('installation.urls')),
-    path('armlogi/', include('manager.urls')),
+    path('', include('manager.urls')),
 ]
 
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

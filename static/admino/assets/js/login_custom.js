@@ -90,7 +90,7 @@ $(document).on('submit','.myForm',function()
         }
         else
         {
-            window.location='dashboard/';
+            window.location='/dashboard/';
         }
       }
     },
