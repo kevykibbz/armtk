@@ -476,7 +476,7 @@ def handleUpload(request,id):
 @allowed_users(allowed_roles=['admins'])
 def UserUploads(request):
     obj=SiteConstants.objects.all()[0]
-    filesdata=UserFileUploads.objects.all().order_by('-id')
+    filesdata=OrderFields.objects.all().order_by('-id')
     paginator=Paginator(filesdata,30)
     page_num=request.GET.get('page')
     files=paginator.get_page(page_num)
@@ -486,6 +486,7 @@ def UserUploads(request):
             'data':request.user,
             'files':files,
             'count':paginator.count,
+            'uploads':filesdata,
     }
     return render(request,'manager/uploads.html',context=data)
 
