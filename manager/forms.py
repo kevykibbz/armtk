@@ -68,7 +68,7 @@ options=[('tertiary','View only'),('secondary','View | Edit'),('primary','View |
 class EProfileForm(forms.ModelForm):
     phone=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
     role=forms.ChoiceField(required=False,choices=options,widget=forms.Select(attrs={'class':'form-control','placeholder':'Role'}))
-    profile_pic=forms.FileField(
+    profile_pic=forms.ImageField(
                                 widget=forms.FileInput(attrs={'class':'profile','accept':'image/*','hidden':True}),
                                 required=False,
                                 validators=[FileExtensionValidator(['jpg','jpeg','png','gif'],message="Invalid image extension",code="invalid_extension")]
@@ -125,7 +125,7 @@ options=[('tertiary','View only'),('secondary','View | Edit'),('primary','View |
 class ExtendedUserProfileChangeForm(forms.ModelForm):
     phone=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
     role=forms.ChoiceField(choices=options,required=False,widget=forms.Select(attrs={'class':'form-control','placeholder':'Role'}))
-    profile_pic=forms.FileField(
+    profile_pic=forms.ImageField(
                                 widget=forms.FileInput(attrs={'class':'profile','accept':'image/*','hidden':True}),
                                 required=False,
                                 validators=[FileExtensionValidator(['jpg','jpeg','png','gif'],message="Invalid image extension",code="invalid_extension")]
@@ -190,7 +190,7 @@ user_roles=[
 class CurrentExtendedUserProfileChangeForm(forms.ModelForm):
     phone=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
     role=forms.ChoiceField(choices=user_roles,error_messages={'required':'Role is required','aria-label':'role'},widget=forms.Select(attrs={'class':'form-control','placeholder':'Role'}))
-    profile_pic=forms.FileField(
+    profile_pic=forms.ImageField(
                                 widget=forms.FileInput(attrs={'class':'profile','accept':'image/*','hidden':True}),
                                 required=False,
                                 validators=[FileExtensionValidator(['jpg','jpeg','png','gif'],message="Invalid image extension",code="invalid_extension")]
