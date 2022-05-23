@@ -17,7 +17,7 @@ SECRET_KEY =env('SECRET_KEY')
 DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.43.253']
-ALLOWED_HOSTS = ['armlogi.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['armlogi.herokuapp.com','127.0.0.1','localhost']
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

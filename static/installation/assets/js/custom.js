@@ -102,7 +102,7 @@ $(document).on('click','.finishBtn',function()
                  el.parent().parent().find('.load-overlay').show();
                  el.parent().parent().find('.load-overlay .loader-container').html('<h6 class="text-success" style="font-size:16px !important;"><i class="fa fa-check-circle"></i> '+callback.message+'</h6>');
                  el.find('button').attr('disabled',true);
-                 window.location='/armlogi/';
+                 window.location='/';
              }
              else
              {
