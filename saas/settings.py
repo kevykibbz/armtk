@@ -14,10 +14,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY =env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #ALLOWED_HOSTS = ['192.168.43.253']
-ALLOWED_HOSTS = ['ec2-13-232-224-131.ap-south-1.compute.amazonaws.com','0.0.0.0']
+ALLOWED_HOSTS = ['armlogi.herokuapp.com','127.0.0.1']
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -107,10 +107,12 @@ DATABASES = {
 # DATABASES = {
 #    'default': 
 #             {
+
 #                 'ENGINE': 'mysql.connector.django',
 #                 'NAME':env('DATABASE_NAME'),
 #                 'USER':env('DATABASE_USER'),
 #                 'PASSWORD':env('DATABASE_PASSWORD'),
+#                  'HOST':env('DATABASE_HOST'),
 #                 'PORT':env('DATABASE_PORT'),
 #                 'OPTIONS':
 #                 {
