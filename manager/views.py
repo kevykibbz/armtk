@@ -486,7 +486,7 @@ def UserUploads(request):
             'data':request.user,
             'files':files,
             'count':paginator.count,
-            'uploads':filesdata,
+            'uploads':files,
     }
     return render(request,'manager/uploads.html',context=data)
 
