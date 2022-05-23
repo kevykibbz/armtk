@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="body">
-                            <a class="mb-2 getprofilepic" href="javascript:void(0)"><img src="{{user.extendedauthuser.profile_pic.url}}" width="180" class="img-fluid rounded-circle shadow user-image" alt="profile-image"></a>
+                            <a class="mb-2 getprofilepic" href="javascript:void(0)"><img src="{% static 'admino/assets/images/loader.gif' %}"  data-src="{% if user.extendedauthuser.profile_pic.url %}{{user.extendedauthuser.profile_pic.url}}{% else %}{%  static 'profiles/placeholder.jpg' %}{% endif %}" width="180" class="img-fluid rounded-circle shadow user-image" alt="profile-image"></a>
                             <br>
                             <p style="margin-top:30px">Provide profile picture</p>
                             <div class="mt-2">
