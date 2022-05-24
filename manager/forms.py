@@ -129,7 +129,7 @@ class UserProfileChangeForm(UserChangeForm):
 
 options=[
         ('Tertiary','View only'),
-        ('secondary','View | Edit'),
+        ('Secondary','View | Edit'),
         ('Admin','View | Edit | Invoice | Admin'),
         ]
 #profileForm
