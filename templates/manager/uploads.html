@@ -49,8 +49,8 @@
                                                     <td>{{file.created_at}}</td>
                                                     <td>
                                                         <a  href="{{file.media.url}}"  title="view" target="_blank" class="btn btn-secondary btn-icon " ><i class="zmdi zmdi-eye"></i></a> |
-                                                         <a  href="{{file.media.url}}" target="_blank" class="btn btn-success btn-icon " type="button" download><i class="zmdi zmdi-cloud-download"></i></a> |
-                                                        <a  data-host="{% url 'user file uploads' %}" href="{% url 'user file uploads delete' id=file.id %}"  class="del-data btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
+                                                         <a  href="{{file.media.url}}" target="_blank" class="btn btn-success btn-icon " type="button" download><i class="zmdi zmdi-cloud-download"></i></a> 
+                                                        <!-- <a  data-host="{% url 'user file uploads' %}" href="{% url 'user file uploads delete' id=file.id %}"  class="del-data btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a> -->
                                                     </td>           
                                                 </tr>
                                             {% endfor %}

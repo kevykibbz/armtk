@@ -239,6 +239,12 @@ class ProfileView(View):
             form=CurrentUserProfileChangeForm(instance=user)
             passform=UserPasswordChangeForm()
             eform=CurrentExtendedUserProfileChangeForm(instance=user.extendedauthuser)
+            if request.user.is_superuser:
+                eform.fields['role'].choices=[('Admin','View | Edit | Invoice | Admin'),]
+                eform.fields['role'].initial=[0]
+            else:
+                eform.fields['role'].choices=[('Tertiary','View only'),('Secondary','View | Edit'),('Admin','View | Edit | Invoice | Admin'),]
+                eform.fields['role'].initial=[0]
             data={
                 'title':f'Edit profile | {user.first_name}',
                 'obj':obj,
@@ -496,7 +502,7 @@ def UserUploads(request):
 def UserUploadsDelete(request,id):
     if request.is_ajax():
         try:
-            obj=UserFileUploads.objects.get(id=id)
+            obj=OrderFields.objects.get(id=id)
             obj.delete() 
             return JsonResponse({'valid':False,'message':'File deleted successfully.','id':id},content_type='application/json')       
         except UserFileUploads.DoesNotExist:

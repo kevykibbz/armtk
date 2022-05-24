@@ -89,6 +89,16 @@
             border-radius:50%;
             overflow:hidden;
         }
+        #id_Phone_0
+        {
+          width:28% !important;
+          float:left;
+        }
+        #id_Phone_1,
+        {
+          width:70% !important;
+          float:right;
+        }
     </style>
 </head>
 <body class="theme-blush">
@@ -182,11 +192,9 @@
                         <a class="image" href="{% url 'user profile' username=user.username %}"><img class="img-fluid" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% if user.extendedauthuser.profile_pic.url %}{{user.extendedauthuser.profile_pic.url}}{% else %}{% static 'profiles/placeholder.jpg' %}{% endif %}" alt="User"></a>
                         <div class="detail">
                             <h4>{{data.username}}</h4>
-                            {% if data.extendedauthuser.role == 'admin' %}
+                            {% if data.extendedauthuser.role == 'Admin' %}
                                 <small><div class="badge badge-success">{{data.extendedauthuser.role}}</div></small> 
-                            {% elif data.extendedauthuser.role == 'primary' %}
-                                <small><div class="badge badge-info">{{data.extendedauthuser.role}}</div></small> 
-                            {% elif data.extendedauthuser.role == 'secondary' %}
+                            {% elif data.extendedauthuser.role == 'Secondary' %}
                                 <small><div class="badge badge-warning">{{data.extendedauthuser.role}}</div></small>
                             {% else %}  
                                 <small><div class="badge badge-secondary">{{data.extendedauthuser.role}}</div></small>    
@@ -206,7 +214,7 @@
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Orders</span></a>
                     <ul class="ml-menu">
                         <li><a href="{% url 'order summary' %}">View orders</a></li>
-                        {% if  user.extendedauthuser.rank == 'primary' or user.extendedauthuser.rank == 'secondary' or data.is_superuser %}
+                        {% if  user.extendedauthuser.rank == 'Secondary' or data.is_superuser %}
                         <li><a href="{% url 'userorder' %}">create new order</a></li>
                         {% endif %}
                     </ul>

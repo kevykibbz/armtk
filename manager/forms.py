@@ -24,7 +24,7 @@ class UserResetPassword(PasswordResetForm):
         return email
 
 class users_registerForm(UserCreationForm):
-    first_name=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First name'}),required=False)
+    first_name=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First name','aria-label':'first_name'}),error_messages={'required':'First name is required'})
     last_name=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last name','aria-label':'last_name'}),error_messages={'required':'Last name is required'})
     email=forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Email address','aria-label':'email'}),error_messages={'required':'Email address is required'})
     username=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username ','aria-label':'username'}),error_messages={'required':'Username is required'})
@@ -64,10 +64,14 @@ class users_registerForm(UserCreationForm):
         if User.objects.filter(username=username).exists():
             raise forms.ValidationError('A user with this username already exists')
         return username
-options=[('tertiary','View only'),('secondary','View | Edit'),('primary','View | Edit | Invoice')]
+options=[
+            ('Tertiary','View only'),
+            ('Secondary','View | Edit'),
+            ('Admin','View | Edit | Invoice | Admin'),
+        ]
 class EProfileForm(forms.ModelForm):
-    phone=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
-    role=forms.ChoiceField(required=False,choices=options,widget=forms.Select(attrs={'class':'form-control','placeholder':'Role'}))
+    phone=PhoneNumberField(widget=PhoneNumberPrefixWidget(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
+    role=forms.ChoiceField(required=False,choices=options,initial="Tertiary",widget=forms.Select(attrs={'class':'form-control show-tick ms select2','placeholder':'Role'}))
     profile_pic=forms.ImageField(
                                 widget=forms.FileInput(attrs={'class':'profile','accept':'image/*','hidden':True}),
                                 required=False,
@@ -80,10 +84,13 @@ class EProfileForm(forms.ModelForm):
     
     def clean_phone(self):
         phone=self.cleaned_data['phone']
-        if ExtendedAuthUser.objects.filter(phone=phone).exists():
-            raise forms.ValidationError('A user with this phone number already exists.')
+        if phone !='':
+            if ExtendedAuthUser.objects.filter(phone=phone).exists():
+                raise forms.ValidationError('A user with this phone number already exists.')
+            else:
+                return phone
         else:
-            return phone
+            raise forms.ValidationError('Phone number is required')
 
 #profileForm
 class UserProfileChangeForm(UserChangeForm):
@@ -120,11 +127,15 @@ class UserProfileChangeForm(UserChangeForm):
         else:
            return email
 
-options=[('tertiary','View only'),('secondary','View | Edit'),('primary','View | Edit | Invoice'),('admin','View | Edit | Invoice | Admin')]
+options=[
+        ('Tertiary','View only'),
+        ('secondary','View | Edit'),
+        ('Admin','View | Edit | Invoice | Admin'),
+        ]
 #profileForm
 class ExtendedUserProfileChangeForm(forms.ModelForm):
-    phone=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
-    role=forms.ChoiceField(choices=options,required=False,widget=forms.Select(attrs={'class':'form-control','placeholder':'Role'}))
+    phone=PhoneNumberField(widget=PhoneNumberPrefixWidget(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
+    role=forms.ChoiceField(choices=options,initial="Tertiary",required=False,widget=forms.Select(attrs={'class':'form-control show-tick ms select2','placeholder':'Role'}))
     profile_pic=forms.ImageField(
                                 widget=forms.FileInput(attrs={'class':'profile','accept':'image/*','hidden':True}),
                                 required=False,
@@ -182,14 +193,14 @@ class CurrentUserProfileChangeForm(UserChangeForm):
            return email
 
 user_roles=[
-        ('tertiary','View only'),
-        ('secondary','View | Edit'),
-        ('admin','View | Edit | Invoice | Admin')
+        ('Tertiary','View only'),
+        ('Secondary','View | Edit'),
+        ('Admin','View | Edit | Invoice | Admin'),
     ]
 #profileForm
 class CurrentExtendedUserProfileChangeForm(forms.ModelForm):
-    phone=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
-    role=forms.ChoiceField(choices=user_roles,error_messages={'required':'Role is required','aria-label':'role'},widget=forms.Select(attrs={'class':'form-control','placeholder':'Role'}))
+    phone=PhoneNumberField(widget=PhoneNumberPrefixWidget(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone example +25479626...'}),error_messages={'required':'Phone number is required'})
+    role=forms.ChoiceField(choices=user_roles,initial="Tertiary", error_messages={'required':'Role is required','aria-label':'role'},widget=forms.Select(attrs={'class':'form-control show-tick ms select2','placeholder':'Role'}))
     profile_pic=forms.ImageField(
                                 widget=forms.FileInput(attrs={'class':'profile','accept':'image/*','hidden':True}),
                                 required=False,

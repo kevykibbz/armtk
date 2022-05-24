@@ -16,7 +16,7 @@
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12">                
                     <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
-                    {% if data.extendedauthuser.role != 'tertiary' %}
+                    {% if data.extendedauthuser.role != 'Tertiary' %}
                         <a href="{% url 'userorder' %}" data-toggle="tooltip" title="New order" class="btn btn-info btn-icon float-right " type="button"><i class="zmdi zmdi-plus"></i>New</a>
                         <a href="{% url 'view orders' %}" data-toggle="tooltip" title="Update order" class="btn btn-secondary btn-icon float-right " type="button"><i class="zmdi zmdi-edit"></i> Update</a>
                     {% endif %}
@@ -135,7 +135,7 @@
                                             {% endif %}
                                         </td>
                                         <td>
-                                            {% if data.extendedauthuser.role != 'tertiary' %}
+                                            {% if data.extendedauthuser.role != 'Tertiary' %}
                                                 <a href="{% url 'edit order' id=item.id %}" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
                                                 <a data-host="{% url 'order summary' %}" href="{% url 'delete single order item' id=item.id %}" data-toggle="tooltip" title="Delete order item" class="del-data btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
                                             {% else %}

@@ -39,7 +39,7 @@ $(document).on('click','.getprofilepic',function()
     var el=$(this);
     el.parents('.card').find('.load-overlay').show();
     el.parents('.card').find('.overlay-close').removeClass('btn-remove');
-    $('.profile').click();
+    $('#id_profile_pic').click();
 });
 
 $(document).on('change','.profile',function()
@@ -108,6 +108,7 @@ $(document).on('submit','.regForm',function()
             {
               $(document).find('.user-image').attr('src',callback.profile_pic);
             }
+            window.location='/view/users/';
         }
         else
         {

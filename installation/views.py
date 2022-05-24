@@ -48,7 +48,7 @@ class InstallationView(View):
 			extended.user=user
 			extended.initials=userform.cleaned_data.get('first_name')[0].upper()+userform.cleaned_data.get('last_name')[0].upper()
 			extended.social_links=sociallinks()
-			extended.role='admin'
+			extended.role='Admin'
 			extended.save()
 			lastdata=siteconstantform.save(commit=False)
 			lastdata.user=user

@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from manager.addons import send_email
 import random
 from django.utils.crypto import get_random_string
+from phonenumber_field.modelfields import PhoneNumberField
 
 class ExtendedAdmin(models.Model):
     user=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
@@ -53,17 +54,17 @@ def bgcolor():
     return color
 
 user_roles=[
-            ('tertiary','View only'),
-            ('secondary','View | Edit'),
-            ('admin','View | Edit | Invoice | Admin')
+            ('Tertiary','View only'),
+            ('Secondary','View | Edit'),
+            ('Admin','View | Edit | Invoice | Admin'),
         ]
 class ExtendedAuthUser(models.Model):
     user=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
-    phone=models.CharField(null=True,blank=True,verbose_name='phone',unique=True,max_length=13)
+    phone=PhoneNumberField(null=True,blank=True,verbose_name='phone',unique=True,max_length=13)
     initials=models.CharField(max_length=10,blank=True,null=True)
     bgcolor=models.CharField(max_length=10,blank=True,null=True,default=bgcolor)
     company=models.CharField(max_length=100,null=True,blank=True,default='Armlogi')
-    profile_pic=models.ImageField(upload_to='profiles/',null=True,blank=True,default="profiles/placeholder.jpg")
+    profile_pic=models.ImageField(upload_to='profiles/',null=True,blank=True,default="placeholder.jpg")
     role=models.CharField(choices=user_roles,max_length=200,null=True,blank=True)
     created_on=models.DateTimeField(default=now)
     class Meta:

@@ -6,21 +6,20 @@
         <div class="row">
             <div class="col-lg-4 col-sm-12">
                 <form class="card auth_form">
-                    <div class="header">
-                        <img class="logo"  src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logo.svg' %}" alt="">
+                    <div class="header" style="color:#fff;">
+                        <img class="logo"  src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logos/armlogi-logo-removebg-preview.svg' %}" alt="{{site_name}} logo">
                         <h5>Error 500</h5>
                         <span>Something's broken :-(</span>
                     </div>
                     <div class="body">
                         <a href="{% url 'home' %}" class="page-refresher btn btn-primary btn-block waves-effect waves-light">GO TO HOMEPAGE</a>                        
                         <div class="signin_with mt-3">
-                            <a href="javascript:void(0);" class="link">Need Help?</a>
+                            <a style="color:#fff;" href="mailto:{{obj.site_email}}" class="link">Need Help?,Email Us</a>
                         </div>
                     </div>
                 </form>
                 <div class="copyright text-center">
-                    &copy;
-                    <script>document.write(new Date().getFullYear())</script>,
+                    <span>&copy;<script>document.write(new Date().getFullYear())</script>,</span>
                     <span><a  href="{% url 'home' %}"> {{site_name}} </a></span>
                 </div>
             </div>

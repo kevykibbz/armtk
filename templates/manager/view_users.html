@@ -59,26 +59,24 @@
                                         <td>{{user.email}}</td>
                                         <td>{{user.extendedauthuser.phone}}</td>
                                         <td>
-                                            {% if user.extendedauthuser.role == 'admin' %}
-                                            <span class="badge badge-success">{{user.extendedauthuser.role}}</span>
-                                            {% elif user.extendedauthuser.role == 'primary' %}
-                                            <span class="badge badge-info">{{user.extendedauthuser.role}}</span>
-                                            {% elif user.extendedauthuser.role == 'secondary' %}
-                                            <span class="badge badge-warning">{{user.extendedauthuser.role}}</span>
-                                            {% elif user.extendedauthuser.role == 'tertiary' %}
-                                            <span class="badge badge-primary">{{user.extendedauthuser.role}}</span>
+                                            {% if user.extendedauthuser.role == 'Admin' %}
+                                            <span class="badge badge-success p-2">{{user.extendedauthuser.role}}</span>
+                                            {% elif user.extendedauthuser.role == 'Secondary' %}
+                                            <span class="badge badge-warning p-2">{{user.extendedauthuser.role}}</span>
+                                            {% elif user.extendedauthuser.role == 'Tertiary' %}
+                                            <span class="badge badge-primary p-2">{{user.extendedauthuser.role}}</span>
                                             {% else %}
-                                            <span class="badge badge-secondary">{{user.extendedauthuser.role}}</span>
+                                            <span class="badge badge-secondary p-2">{{user.extendedauthuser.role}}</span>
                                             {% endif %}
                                         </td>
                                         <td>{{user.date_joined}}</td>
                                         <td>
-                                            {% if user.extendedauthuser.role == 'admin' %}
+                                            {% if user.extendedauthuser.role == 'Admin' %}
                                             <a  href="{% url 'user profile' username=user.username %}" class="btn btn-success btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
                                             <a  href="javascript:void(0)" class=" btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
                                             {% else %}
                                             <a  href="{% url 'edit user' id=user.id %}" class="btn btn-success btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
-                                            <a  data-host="{% url 'user file uploads' %}" href="{% url 'delete user' id=user.id %}" class="del-data btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
+                                            <a  data-host="{% url 'view users' %}" href="{% url 'delete user' id=user.id %}" class="del-data btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
                                             {% endif %}
                                         </td>
                                      </tr>

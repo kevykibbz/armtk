@@ -11,6 +11,7 @@ environ.Env.read_env()
 class SiteConstants(models.Model):
     user=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
     site_name=models.CharField(null=True,blank=True,max_length=100,default=env('SITE_NAME'))
+    site_email=models.CharField(null=True,blank=True,max_length=100,default=env('SITE_EMAIL'))
     theme_color=models.CharField(null=True,blank=True,max_length=100,default=env('THEME_COLOR'))
     site_url=models.URLField(null=True,blank=True,default=env('SITE_URL'))
     description=models.TextField(null=True,blank=True,default=env('SITE_DESCRIPTION'))
