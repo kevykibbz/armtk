@@ -238,7 +238,7 @@ class UserPasswordChangeForm(UserCreationForm):
            return oldpassword 
 
 class NewOderForm(forms.ModelForm):
-    ordername=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Order name','aria-label':'neworder'}),error_messages={'required':'Order name is required'})
+    ordername=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Order name','aria-label':'neworder','list':'orderlist'}),error_messages={'required':'Order name is required'})
     class Meta:
         model=Oders
         fields=['ordername']

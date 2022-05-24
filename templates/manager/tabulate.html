@@ -90,11 +90,13 @@
                                                 <div class="form-group">
                                                     <label for="">Customer</label>
                                                     {{form.customer}}
-                                                    <datalist id="customerlist">
-                                                    {% for item in customerlist %}
-                                                        <option value="{{item.customer}}">
-                                                    {% endfor %}
-                                                    </datalist>
+                                                    {% if customerlist %}
+                                                        <datalist id="customerlist">
+                                                        {% for item in customerlist %}
+                                                            <option value="{{item.customer}}">
+                                                        {% endfor %}
+                                                        </datalist>
+                                                    {% endif %}
                                                     <div class="feedback"></div>
                                                 </div>
                                             </div>

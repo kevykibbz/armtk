@@ -48,6 +48,13 @@
                                 <div class="form-group">
                                     <label class="text-left" for="">Order name <span class="text-danger">*</span></label>
                                     {{form.ordername}}
+                                    {% if orders %}
+                                        <datalist id="customerlist">
+                                        {% for order in orders %}
+                                            <option value="{{order.ordername}}">
+                                        {% endfor %}
+                                        </datalist>
+                                    {% endif %}
                                     <div class="feedback"></div>
                                 </div>
                                 <div class="text-center">
