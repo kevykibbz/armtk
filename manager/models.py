@@ -168,7 +168,7 @@ class UserFileUploads(models.Model):
     def __str__(self)->str:
         return f'{self.user.username} file uploads'
 
-    def delete(self, *args, **kwargs):
+    def delete(self, using=None,keep_parents=False):
         if self.media:
-            self.media.delete()
-        super().delete(*args,**kwargs)
+            self.media.storage.delete(self.media.name)
+        super().delete()

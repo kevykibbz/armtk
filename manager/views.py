@@ -433,6 +433,11 @@ class TabulateOrder(View):
         else:
             return JsonResponse({'valid':False,'form_errors':form.errors},content_type='application/json')
 
+@property
+def photo_url(self):
+    if self.media and hasattr(self.media,'url'):
+        return self.media.url
+
 #orderSummary
 @login_required(login_url='/')
 def orderSummary(request):
@@ -472,7 +477,13 @@ def handleUpload(request,id):
         ob=OrderFields.objects.get(id__exact=id)
         form=FormUploads(request.POST,request.FILES or None,instance=ob)
         if form.is_valid():
-            form.save()
+            t=form.save(commit=False)
+            file_media=request.FILES['media']
+            fss=FileSystemStorage()
+            filename01=fss.save(file_media.name,file_media)
+            file_media_url=fss.url(filename01)
+            t.media=file_media
+            t.save()
             return JsonResponse({'valid':False,'message':'File saved successfully.'},content_type='application/json')
         else:       
             return JsonResponse({'valid':True,'message':'User does not exist'},content_type='application/json')
@@ -485,6 +496,7 @@ def handleUpload(request,id):
 def UserUploads(request):
     obj=SiteConstants.objects.all()[0]
     filesdata=OrderFields.objects.all().order_by('-id')
+
     paginator=Paginator(filesdata,30)
     page_num=request.GET.get('page')
     files=paginator.get_page(page_num)
