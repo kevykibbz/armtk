@@ -392,7 +392,7 @@ def viewOrder(request,id):
 def deleteOrder(request,id):
     if request.is_ajax():
         try:
-            obj=Oders.objects.get(ordername_id=id)
+            obj=Oders.objects.get(orderfields__order_id__exact=id)
             obj.delete() 
             return JsonResponse({'valid':False,'message':'Order deleted successfully.','id':id},content_type='application/json')       
         except Oders.DoesNotExist:
