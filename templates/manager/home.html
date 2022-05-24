@@ -121,7 +121,7 @@
                                      {% for item in orders %}
                                      <tr id="id_{{item.id}}">
                                         <td>{{forloop.counter}}.</td>
-                                        <td>{% if item.load %}{{item.load}}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.load %}#{{item.load}}{% else %} No data {% endif %}</td>
                                         <td>
                                             {% if item.status %}
                                                 {% if item.status == 'cancelled_pickup' %}
