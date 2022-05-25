@@ -35,7 +35,8 @@
                                             <th>#</th>
                                             <th>Name</th>                                        
                                             <th>load</th>                                        
-                                            <th>Created Date</th>
+                                            <th>Created on</th>
+                                            <th>Modified on</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -48,6 +49,7 @@
                                                     <td><i class="zmdi zmdi-attachment-alt"></i> {{file.media}}</td>
                                                     <td class="text-info">#{{file.load}}</td>
                                                     <td>{{file.created_at}}</td>
+                                                    <td>{{file.modified_at}}</td>
                                                     <td>
                                                         <a href="{{file.media.url}}"  target="_blank" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
                                                         <a  href="{{file.media.url}}" data-toggle="tooltip" title="Download file" class="btn btn-outline-success btn-icon" download><i class="zmdi zmdi-download"></i></a>
