@@ -325,5 +325,14 @@
     <script src="{% static 'admino/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js' %}"></script>
     <script src="{% static 'admino/assets/plugins/jquery-datatable/buttons/buttons.print.min.js' %}"></script>
     <script src="{% static 'admino/assets/js/pages/tables/jquery-datatable.js' %}"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $(document).on('click','.ls-toggle-btn',function()
+            {
+                $('.user-pallate').toggleClass('user-area');
+            });
+        });
+    </script>
 </body>
 </html>
