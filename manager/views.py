@@ -241,10 +241,10 @@ class ProfileView(View):
             passform=UserPasswordChangeForm()
             eform=CurrentExtendedUserProfileChangeForm(instance=user.extendedauthuser)
             if request.user.is_superuser:
-                eform.fields['role'].choices=[('Admin','View | Edit | Invoice | Admin'),]
+                eform.fields['role'].choices=[('Admin','View | Edit | Admin'),]
                 eform.fields['role'].initial=[0]
             else:
-                eform.fields['role'].choices=[('Tertiary','View only'),('Secondary','View | Edit'),('Admin','View | Edit | Invoice | Admin'),]
+                eform.fields['role'].choices=[('Tertiary','View only'),('Secondary','View | Edit'),('Admin','View | Edit | Admin'),]
                 eform.fields['role'].initial=[0]
             data={
                 'title':f'Edit profile | {user.first_name}',
