@@ -194,14 +194,14 @@
                 <li>
                     <div class="user-info">
                         <a class="image" href="{% url 'user profile' username=user.username %}"><img class="img-fluid" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% if user.extendedauthuser.profile_pic.url %}{{user.extendedauthuser.profile_pic.url}}{% else %}{% static 'profiles/placeholder.jpg' %}{% endif %}" alt="User"></a>
-                        <div class="detail">
+                        <div class="detail fw-bolder">
                             <h4>{{data.username}}</h4>
                             {% if data.extendedauthuser.role == 'Admin' %}
-                                <small><div class="badge badge-success">{{data.extendedauthuser.role}}</div></small> 
+                                <small><div class="badge badge-success p-2">{{data.extendedauthuser.role}}</div></small> 
                             {% elif data.extendedauthuser.role == 'Secondary' %}
-                                <small><div class="badge badge-warning">{{data.extendedauthuser.role}}</div></small>
+                                <small><div class="badge badge-warning p-2">{{data.extendedauthuser.role}}</div></small>
                             {% else %}  
-                                <small><div class="badge badge-secondary">{{data.extendedauthuser.role}}</div></small>    
+                                <small><div class="badge badge-secondary p-2">{{data.extendedauthuser.role}}</div></small>    
                             {% endif %}                
                         </div>
                     </div>
