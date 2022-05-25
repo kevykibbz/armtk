@@ -146,7 +146,7 @@ class OrderFields(models.Model):
     acct_email=models.CharField(max_length=100,null=True)
     media=models.FileField(upload_to='uploads/',null=True,blank=True)
     date=models.DateField(null=True)
-    created_at=models.DateTimeField(auto_now_add=True)
+    created_at=models.DateTimeField(default=now)
     class Meta:
         db_table='orderfields'
         verbose_name_plural='orderfields'
