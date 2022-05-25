@@ -226,10 +226,13 @@
                 {% if  data.is_superuser %}
                     <li class=""><a href="{% url 'user file uploads' %}"><i class="zmdi zmdi-attachment-alt"></i><span>Uploads</span></a></li>
                 {% endif %}
-                <li class="d-md-none"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings "></i><span>Settings</span></a></li>
-                 <li class=""><a href="{% url 'user profile' username=user.username %}"><i class="zmdi zmdi-edit"></i><span>Account profile</span>
-                            </a>
-                        </li>
+                <li class="d-md-none d-block"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings "></i><span>Settings</span></a></li>
+                <li class="d-md-none">
+                    <a href="{% url 'user profile' username=user.username %}">
+                        <i class="zmdi zmdi-edit"></i>
+                        <span>Account profile</span>
+                    </a>
+                </li>
                 <li class="d-md-none d-block"><a href="{% url 'logout' %}" class="menu-toggle mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i><span>Logout</span></a></li>
                  <li>
                 <div class="progress-container progress-primary d-md-block d-none" style="margin-top:0%;">
