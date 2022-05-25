@@ -47,7 +47,6 @@
 
         customInput.onchange = ({target})=>
         {
-          alert('hereee')
           let file = target.files[0];
           if(file)
           {
@@ -56,7 +55,6 @@
             {
               let splitName = fileName.split('.');
               fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
-              console.log(fileName);
             }
           }
         }

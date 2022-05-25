@@ -532,7 +532,3 @@ $(document).on('change','input[type=file]',function()
   $(this).removeClass('is-invalid').addClass('is-valid').parent().find('.feedback').removeClass('invalid-feedback').addClass('valid-feedback').html('Filename: '+this.files[0].name);
 });
 
-$(document).on('click','.ls-toggle-btn',function()
-{
-    $('.user-pallate').toggleClass('user-area');
-});
