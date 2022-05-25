@@ -67,7 +67,7 @@ class users_registerForm(UserCreationForm):
 options=[
             ('Tertiary','View only'),
             ('Secondary','View | Edit'),
-            ('Admin','View | Edit | Invoice | Admin'),
+            ('Admin','View | Edit  | Admin'),
         ]
 class EProfileForm(forms.ModelForm):
     phone=PhoneNumberField(widget=PhoneNumberPrefixWidget(attrs={'class':'form-control','type':'tel','aria-label':'phone','placeholder':'Phone'}),error_messages={'required':'Phone number is required'})
@@ -130,7 +130,7 @@ class UserProfileChangeForm(UserChangeForm):
 options=[
         ('Tertiary','View only'),
         ('Secondary','View | Edit'),
-        ('Admin','View | Edit | Invoice | Admin'),
+        ('Admin','View | Edit  | Admin'),
         ]
 #profileForm
 class ExtendedUserProfileChangeForm(forms.ModelForm):

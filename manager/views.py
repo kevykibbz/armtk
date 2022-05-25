@@ -498,7 +498,7 @@ def handleUpload(request,id):
 @allowed_users(allowed_roles=['admins'])
 def UserUploads(request):
     obj=SiteConstants.objects.all()[0]
-    orders=OrderFields.objects.all().order_by('-id')
+    orders=OrderFields.objects.filter(media__isnull=False).all().order_by('-id')
     paginator=Paginator(orders,30)
     page_num=request.GET.get('page')
     orders=paginator.get_page(page_num)

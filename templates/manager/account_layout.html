@@ -190,7 +190,7 @@
             </a>
         </div>
         <div class="menu">
-            <ul class="list position-relative">
+            <ul class="list">
                 <li>
                     <div class="user-info">
                         <a class="image" href="{% url 'user profile' username=user.username %}"><img class="img-fluid" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% if user.extendedauthuser.profile_pic.url %}{{user.extendedauthuser.profile_pic.url}}{% else %}{% static 'profiles/placeholder.jpg' %}{% endif %}" alt="User"></a>
@@ -229,7 +229,7 @@
                 <li class="d-md-none d-block"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings "></i><span>Settings</span></a></li>
                 <li class="d-md-none d-block"><a href="{% url 'logout' %}" class="menu-toggle mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i><span>Logout</span></a></li>
                  <li>
-                <div class="progress-container progress-primary " style="position:absolute;bottom:50px;">
+                <div class="progress-container progress-primary " style="margin-top:90%;">
                     <h4>{% now "l" %}</h4>
                     <h1>{% now "H:i"  %}</h1>
                     <h4>{% now "jS F Y " %}</h4>
