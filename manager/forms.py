@@ -195,7 +195,7 @@ class CurrentUserProfileChangeForm(UserChangeForm):
 user_roles=[
         ('Tertiary','View only'),
         ('Secondary','View | Edit'),
-        ('Admin','View | Edit | Invoice | Admin'),
+        ('Admin','View | Edit | Admin'),
     ]
 #profileForm
 class CurrentExtendedUserProfileChangeForm(forms.ModelForm):
@@ -284,9 +284,11 @@ class OrderFieldsForm(forms.ModelForm):
     customer_email=forms.EmailField(widget=forms.EmailInput(attrs={'style':'text-transform:lowercase;','class':'form-control','placeholder':'Customer email'}),required=False)
     notify=forms.CharField(widget=forms.TextInput(attrs={'style':'text-transform:lowercase;','class':'form-control','placeholder':'Notify'}),required=False)
     acct_email=forms.EmailField(widget=forms.EmailInput(attrs={'style':'text-transform:lowercase;','class':'form-control','placeholder':'Acct email','required':False}),required=False)
+    media=forms.FileField(widget=forms.FileInput(attrs={'class':'custom-file-input','id':'customFileInput'}),required=False)
     class Meta:
         model=OrderFields
         fields=[
+                'media',
                 'status',
                 'date',
                 'pierpass',

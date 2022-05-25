@@ -99,6 +99,10 @@
           width:70% !important;
           float:right;
         }
+        .ls-toggle-menu .sidebar .menu .list .ml-menu
+        {
+            background: #222 !important;
+        }
     </style>
 </head>
 <body class="theme-blush">
@@ -180,8 +184,8 @@
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <div class="navbar-brand">
-            <button class="btn-menu ls-toggle-btn" type="button"><i class="zmdi zmdi-menu"></i></button>
-            <a  href="{% url 'home' %}" style="margin-left:-20px !important;">
+            <button class="btn-menu ls-toggle-btn" style="color:#fff" type="button"><i class="zmdi zmdi-menu"></i></button>
+            <a  href="{% url 'home' %}">
                 <img src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logos/armlogi-logo-removebg-preview.svg' %}" width="200" alt="{{site_name}}">
             </a>
         </div>
@@ -225,7 +229,7 @@
                 <li class="d-md-none d-block"><a href="javascript:void(0);" class="js-right-sidebar" title="Setting"><i class="zmdi zmdi-settings "></i><span>Settings</span></a></li>
                 <li class="d-md-none d-block"><a href="{% url 'logout' %}" class="menu-toggle mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i><span>Logout</span></a></li>
                  <li>
-                <div class="progress-container progress-primary " style="margin-top:10%;">
+                <div class="progress-container progress-primary " style="margin-top:90%;">
                     <h4>{% now "l" %}</h4>
                     <h1>{% now "H:i"  %}</h1>
                     <h4>{% now "jS F Y " %}</h4>

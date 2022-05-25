@@ -2,6 +2,7 @@
         form_action =form.getAttribute('action'),
         form_method =form.getAttribute('method'),
         fileInput = document.querySelector(".file-input"),
+        customInput = document.getElementById("customFileInput"),
         progressArea = document.querySelector(".progress-area"),
         uploadedArea = document.querySelector(".uploaded-area");
         let fd= new FormData(form);
@@ -43,6 +44,23 @@
                 uploadFile(fd,fileName);
             }
         });
+
+        customInput.onchange = ({target})=>
+        {
+          alert('hereee')
+          let file = target.files[0];
+          if(file)
+          {
+            let fileName = file.name;
+            if(fileName.length >= 12)
+            {
+              let splitName = fileName.split('.');
+              fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
+              console.log(fileName);
+            }
+          }
+        }
+
         fileInput.onchange = ({target})=>
         {
           let file = target.files[0];
@@ -115,3 +133,4 @@
               }
               xhr.send(formdata);
         }
+

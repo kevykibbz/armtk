@@ -20,6 +20,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import update_session_auth_hash
 import re
 from .search import *
+from django.utils.timezone import now
 from django.contrib.humanize.templatetags.humanize import intcomma
 
 @method_decorator(unauthenticated_user,name='dispatch')
@@ -363,9 +364,11 @@ class EditOrder(View):
         return render(request,'manager/tabulate.html',context=data)
     def post(self,request,id):
         data=OrderFields.objects.get(id=id)
-        form=OrderFieldsForm(request.POST or None,instance=data)
+        form=OrderFieldsForm(request.POST,request.FILES or None,instance=data)
         if form.is_valid():
-            form.save()
+            t=form.save(commit=False)
+            t.created_at=now()
+            t.save()
             return JsonResponse({'valid':True,'message':'data saved'},content_type='application/json')
         else:
             return JsonResponse({'valid':False,'form_errors':form.errors},content_type='application/json')
@@ -426,7 +429,7 @@ class TabulateOrder(View):
     
     def post(self,request,id):
         order=OrderFields.objects.get(id__exact=id)
-        form=OrderFieldsForm(request.POST or None,instance=order)
+        form=OrderFieldsForm(request.POST,request.FILES or None,instance=order)
         if form.is_valid():
             form.save()
             return JsonResponse({'valid':True,'message':'data saved'},content_type='application/json')
@@ -495,18 +498,16 @@ def handleUpload(request,id):
 @allowed_users(allowed_roles=['admins'])
 def UserUploads(request):
     obj=SiteConstants.objects.all()[0]
-    filesdata=OrderFields.objects.all().order_by('-id')
-
-    paginator=Paginator(filesdata,30)
+    orders=OrderFields.objects.all().order_by('-id')
+    paginator=Paginator(orders,30)
     page_num=request.GET.get('page')
-    files=paginator.get_page(page_num)
+    orders=paginator.get_page(page_num)
     data={
             'title':'File uploads',
             'obj':obj,
             'data':request.user,
-            'files':files,
             'count':paginator.count,
-            'uploads':files,
+            'files':orders,
     }
     return render(request,'manager/uploads.html',context=data)
 

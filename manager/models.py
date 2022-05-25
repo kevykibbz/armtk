@@ -56,7 +56,7 @@ def bgcolor():
 user_roles=[
             ('Tertiary','View only'),
             ('Secondary','View | Edit'),
-            ('Admin','View | Edit | Invoice | Admin'),
+            ('Admin','View | Edit  | Admin'),
         ]
 class ExtendedAuthUser(models.Model):
     user=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)

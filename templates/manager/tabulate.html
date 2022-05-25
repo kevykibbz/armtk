@@ -276,11 +276,20 @@
                                                     <div class="feedback"></div>
                                                 </div>
                                             </div>
+
+                                           <div class="col-12 form-group">
+                                                <label for="">File</label>
+                                                <div class="custom-file">
+                                                    {{form.media}}
+                                                    <label class="custom-file-label" for="customFileInput">Add attachment</label>
+                                                    <div class="feedback"></div>
+                                                 </div>
+                                           </div>
                                        </div>
                                     </section>
                                 </div>
                             </form>
-                            <div class="wrapper">
+                            <!-- <div class="wrapper">
                                 <header class="upload-header">File Uploader</header>
                                 <form  class="upload-form" action="{% url 'file upload' id=form_id %}" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
@@ -290,7 +299,7 @@
                                 </form>
                                 <section class="sec progress-area "></section>
                                 <section class="sec uploaded-area"></section>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

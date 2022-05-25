@@ -526,3 +526,8 @@ $(document).on('change','#id_stats',function()
     $('.status-field').val(selected_item);
     $('.select-model').modal('hide');
 });
+
+$(document).on('change','input[type=file]',function()
+{
+  $(this).removeClass('is-invalid').addClass('is-valid').parent().find('.feedback').removeClass('invalid-feedback').addClass('valid-feedback').html('Filename: '+this.files[0].name);
+});
