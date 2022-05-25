@@ -59,50 +59,7 @@
             background-size: cover;
             color: #fff;
         }
-        .list li a
-        {
-            color: #fff !important;   
-        }
-        .sidebar .menu .list a i
-        {
-            -moz-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            -o-transform: rotate(0deg);
-            -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-            -moz-transition: all 0.5s;
-            -o-transition: all 0.5s;
-            -webkit-transition: all 0.5s;
-            transition: all 0.5s;
-            width: 16px;
-        }
-        .navbar-brand span
-        {
-            font-size:18px;
-            font-weight:800;
-            color: #fff;
-        }
-        .user-image
-        {
-            width:180px;
-            height:180px;
-            border-radius:50%;
-            overflow:hidden;
-        }
-        #id_Phone_0
-        {
-          width:28% !important;
-          float:left;
-        }
-        #id_Phone_1,
-        {
-          width:70% !important;
-          float:right;
-        }
-        .ls-toggle-menu .sidebar .menu .list .ml-menu
-        {
-            background: #222 !important;
-        }
+       
     </style>
 </head>
 <body class="theme-blush">
@@ -235,7 +192,7 @@
                 </li>
                 <li class="d-md-none d-block"><a href="{% url 'logout' %}" class="menu-toggle mega-menu" title="Sign Out"><i class="zmdi zmdi-power"></i><span>Logout</span></a></li>
                  <li>
-                <div class="progress-container progress-primary d-md-block d-none" style="margin-top:0%;">
+                <div class="progress-container progress-primary d-md-block d-none user-pallate" style="margin-top:90%">
                     <h4>{% now "l" %}</h4>
                     <h1>{% now "H:i"  %}</h1>
                     <h4>{% now "jS F Y " %}</h4>

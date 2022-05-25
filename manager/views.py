@@ -44,7 +44,8 @@ class Dashboard(View):
                     if re.fullmatch(regex,key):
                         #email address
                         if User.objects.filter(email=key).exists():
-                            user=authenticate(username=User.objects.get(email=key).username,password=password)
+                            data=User.objects.get(email=key)
+                            user=authenticate(username=data.username,password=password)
                         else:
                             form_errors={"username": ["Invalid email address."]}
                             return JsonResponse({'valid':False,'form_errors':form_errors},content_type="application/json")
@@ -56,15 +57,15 @@ class Dashboard(View):
                             form_errors={"username": ["Invalid username."]}
                             return JsonResponse({'valid':False,'form_errors':form_errors},content_type="application/json")
                         
-                        if user is not None:
-                            if 'remember' in request.POST:
-                               request.session.set_expiry(1209600) #two weeeks
-                            else:
-                               request.session.set_expiry(0) 
-                            login(request,user)
-                            return JsonResponse({'valid':True,'feedback':'success:login successfully.'},content_type="application/json")
-                        form_errors={"password": ["Password is incorrect or inactive account."]}
-                        return JsonResponse({'valid':False,'form_errors':form_errors},content_type="application/json")
+                    if user is not None:
+                        if 'remember' in request.POST:
+                           request.session.set_expiry(1209600) #two weeeks
+                        else:
+                           request.session.set_expiry(0) 
+                        login(request,user)
+                        return JsonResponse({'valid':True,'feedback':'success:login successfully.'},content_type="application/json")
+                    form_errors={"password": ["Password is incorrect or inactive account."]}
+                    return JsonResponse({'valid':False,'form_errors':form_errors},content_type="application/json")
                 else:
                     form_errors={"password": ["Password is required."]}
                     return JsonResponse({'valid':False,'form_errors':form_errors},content_type="application/json")

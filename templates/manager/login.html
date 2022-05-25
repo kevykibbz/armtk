@@ -11,13 +11,13 @@
                         <img class="logo" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% static 'admino/assets/images/logos/armlogi-logo-removebg-preview.svg' %}" alt="{{site_name}} logo">
                     </div>
                     <div class="body">
-                        <label for=""class="float-left">Username</label>
+                        <label for=""class="float-left">Username | Email address</label>
                         <div class="form-group input-group mb-3">
-                            <input type="text" class="form-control"  name="username" placeholder="Username or Email">
+                            <input type="text" class="form-control" style="text-transform:lowercase;" name="username" placeholder="Username or Email">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="text-light zmdi zmdi-account-circle"></i></span>
                             </div>
-                            <div class="feedback"></div>
+                            <div class="feedback float-left"></div>
                         </div>
                         <label for=""class="float-left">Password</label>
                         <div class="form-group input-group mb-3">
@@ -25,7 +25,7 @@
                             <div class="input-group-append">                                
                                 <span class="input-group-text"><i class="text-light zmdi zmdi-lock"></i></span>
                             </div>
-                            <div class="feedback"></div>                            
+                            <div class="feedback float-left"></div>                            
                         </div>
                         <div class="checkbox">
                             <input id="remember_me" name="remember" type="checkbox">
