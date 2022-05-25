@@ -65,6 +65,7 @@
                                         <th>Customer email</th>
                                         <th>Notify</th>
                                         <th>Acct email</th>
+                                        <th>Modified on</th>
                                         <th>Created on</th>
                                         <th>File</th>
                                         <th>Action</th>
@@ -125,6 +126,7 @@
                                         <td>{% if item.customer_email %}{{item.customer_email}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.notify %}{{item.notify }}{% else %} No data {% endif %}</td>
                                         <td>{% if item.acct_email %}{{item.acct_email}}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.modified_at %}{{item.modified_at}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.created_at %}{{item.created_at}}{% else %} No data {% endif %}</td>
                                         <td>
                                             {% if item.media %}
@@ -147,7 +149,7 @@
                                      {% endfor %}
                                     {% else %}
                                     <tr>
-                                        <td colspan="32">
+                                        <td colspan="35">
                                             <p class="text-info"><i class="zmdi zmdi-alert-triangle"></i> No order item(s) found.</p>
                                         </td>
                                     </tr>

@@ -146,10 +146,12 @@ class OrderFields(models.Model):
     acct_email=models.CharField(max_length=100,null=True)
     media=models.FileField(upload_to='uploads/',null=True,blank=True)
     date=models.DateField(null=True)
+    modified_at=models.DateTimeField(default=now)
     created_at=models.DateTimeField(default=now)
     class Meta:
         db_table='orderfields'
         verbose_name_plural='orderfields'
+        ordering=('created_at',)
     def __str__(self)->str:
         return self.order.ordername
 

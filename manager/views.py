@@ -20,8 +20,10 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth import update_session_auth_hash
 import re
 from .search import *
-from django.utils.timezone import now
+import datetime
 from django.contrib.humanize.templatetags.humanize import intcomma
+
+
 
 @method_decorator(unauthenticated_user,name='dispatch')
 class Dashboard(View):
@@ -78,7 +80,7 @@ def home(request):
     orders_count=Oders.objects.count()
     completed_orders=OrderFields.objects.filter(status__icontains='delivered').count()
     cancelled_orders=OrderFields.objects.filter(status__icontains='cancelled').count()
-    orders=OrderFields.objects.all().order_by('-id')[:12]
+    orders=OrderFields.objects.all().order_by('-modified_at')[:12]
     data={
         'title':'home',
         'obj':obj,
@@ -367,7 +369,7 @@ class EditOrder(View):
         form=OrderFieldsForm(request.POST,request.FILES or None,instance=data)
         if form.is_valid():
             t=form.save(commit=False)
-            t.created_at=now()
+            t.modified_at=now()
             t.save()
             return JsonResponse({'valid':True,'message':'data saved'},content_type='application/json')
         else:
@@ -445,7 +447,8 @@ def photo_url(self):
 @login_required(login_url='/')
 def orderSummary(request):
     obj=SiteConstants.objects.all()[0]
-    orders=OrderFields.objects.all().order_by('-id')
+    now=datetime.datetime.now()
+    orders=OrderFields.objects.all().order_by('-modified_at')
     paginator=Paginator(orders,30)
     page_num=request.GET.get('page')
     orders=paginator.get_page(page_num)

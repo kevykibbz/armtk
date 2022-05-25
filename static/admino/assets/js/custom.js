@@ -224,7 +224,7 @@ $(document).on('click','.confirmBtn',function()
           $('.delete-model').modal('hide');
           $('.small-model').modal('show');
           $('.small-model').find('.modal-title').text('Success');
-          $('.small-model').find('.modal-body').html('<div class="text-success text-center"><i class="fa fa-check-circle"></i> User deleted successfully.</div>');
+          $('.small-model').find('.modal-body').html('<div class="text-success text-center"><i class="fa fa-check-circle"></i> Item deleted successfully.</div>');
         },
         error(err)
         {
