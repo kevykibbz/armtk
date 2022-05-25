@@ -155,6 +155,12 @@ class OrderFields(models.Model):
     def __str__(self)->str:
         return self.order.ordername
 
+    def delete(self, using=None,keep_parents=False):
+        if self.media:
+            self.media.storage.delete(self.media.name)
+        super().delete()
+
+
 
 #uploads
 class UserFileUploads(models.Model):
