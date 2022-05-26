@@ -5,7 +5,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.views.static import serve
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #path('admin/', admin.site.urls),
     path('installation/',include('installation.urls')),
     path('', include('manager.urls')),
     url(r'^uploads/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
