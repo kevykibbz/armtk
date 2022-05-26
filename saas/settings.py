@@ -191,7 +191,7 @@ LOGOUT_REDIRECT_URL='/'
 STATIC_URL = '/static/'
 MEDIA='/media/'
 
-STATICFILES_STORAGE='whitenoise.storage.CompressesdStaticFilesStorage'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
