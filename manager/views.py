@@ -434,7 +434,7 @@ def sort_prefix(item):
 def orderSummary(request):
     obj=SiteConstants.objects.all()[0]
     now=datetime.datetime.now()
-    orders=OrderFields.objects.all().order_by('-modified_at')
+    orders=OrderFields.objects.all().order_by('prefix')
     paginator=Paginator(orders,30)
     page_num=request.GET.get('page')
     orders=paginator.get_page(page_num)

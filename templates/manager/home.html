@@ -132,7 +132,7 @@
                                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Delete order item"class="btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
                                             {% endif %}
                                         </td>
-                                        <td>21A{{forloop.counter|stringformat:"05d"}}</td>
+                                        <td>{{item.prefix}}</td>
                                         <td>
                                             {% if item.status %}
                                                 {% if item.status == 'cancelled_pickup' %}
