@@ -175,7 +175,7 @@
                 <li><a href="javascript:void(0);" class="menu-toggle"><i class="zmdi zmdi-shopping-cart"></i><span>Orders</span></a>
                     <ul class="ml-menu">
                         <li><a href="{% url 'order summary' %}">View orders</a></li>
-                        {% if  data.extendedauthuser.rank == 'Secondary' or data.is_superuser %}
+                        {% if  data.extendedauthuser.role == 'Secondary' or data.is_superuser %}
                         <li><a href="{% url 'userorder' %}">create new order</a></li>
                         {% endif %}
                     </ul>
