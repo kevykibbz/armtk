@@ -150,7 +150,7 @@
             <ul class="list">
                 <li>
                     <div class="user-info">
-                        <a class="image" href="{% url 'user profile' username=user.username %}"><img class="img-fluid" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% if user.extendedauthuser.profile_pic.url %}{{user.extendedauthuser.profile_pic.url}}{% else %}{% static 'profiles/placeholder.jpg' %}{% endif %}" alt="User"></a>
+                        <a class="image" href="{% url 'user profile' username=user.username %}"><img class="img-fluid" src="{% static 'admino/assets/images/loader.gif' %}" data-src="{% if user.extendedauthuser.profile_pic.url %}/media{{user.extendedauthuser.profile_pic.url}}{% else %}{% static 'profiles/placeholder.jpg' %}{% endif %}" alt="User"></a>
                         <div class="detail fw-bolder">
                             <h4>{{data.username}}</h4>
                             {% if data.extendedauthuser.role == 'Admin' %}

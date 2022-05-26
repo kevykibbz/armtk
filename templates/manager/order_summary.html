@@ -130,8 +130,8 @@
                                         <td>{% if item.created_at %}{{item.created_at}}{% else %} No data {% endif %}</td>
                                         <td>
                                             {% if item.media.url %}
-                                                <a href="{{item.media.url}}"  target="_blank" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
-                                                <a  href="{{item.media.url}}" data-toggle="tooltip" title="Download file" class="btn btn-outline-success btn-icon" download><i class="zmdi zmdi-download"></i></a>
+                                                <a href="/media{{item.media.url}}"  target="_blank" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
+                                                <a  href="/media{{item.media.url}}" data-toggle="tooltip" title="Download file" class="btn btn-outline-success btn-icon" download><i class="zmdi zmdi-download"></i></a>
                                             {% else %}
                                                 No file found
                                             {% endif %}

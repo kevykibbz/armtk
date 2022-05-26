@@ -97,23 +97,23 @@ WSGI_APPLICATION = 'saas.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':'admino',
-    }
- }
+# DATABASES = {
+#     'default': {
+#          'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME':'admino',
+#     }
+#  }
 #postgres://xdpajrqtvijfka:44def245e34f9569a2a293b8ca0b6c2e8fcb9c0a897c1b9a5c5d137e0b49c4a0@ec2-34-236-94-53.compute-1.amazonaws.com:5432/df2pholl515ae7
 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql',
-#        'NAME':env('DATABASE_NAME'),
-#        'HOST':env('DATABASE_HOST'),
-#        'USER':env('DATABASE_USER'),
-#        'PASSWORD':env('DATABASE_PASSWORD'),
-#    }
-# }
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME':env('DATABASE_NAME'),
+       'HOST':env('DATABASE_HOST'),
+       'USER':env('DATABASE_USER'),
+       'PASSWORD':env('DATABASE_PASSWORD'),
+   }
+}
 # DATABASES = {
 #    'default': 
 #             {

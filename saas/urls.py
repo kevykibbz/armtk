@@ -8,13 +8,12 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     path('installation/',include('installation.urls')),
     path('', include('manager.urls')),
-    url(r'^uploads/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
-    url(r'^profiles/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
+    url(r'^media/(?P<path>.*)$',serve,{'document_root':settings.MEDIA_ROOT}),
     url(r'^static/(?P<path>.*)$',serve,{'document_root':settings.STATIC_ROOT}),
 ]
 
-urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
-urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+#urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+#urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 
 handler400 ='errors.views.error_400'
 handler403 ='errors.views.error_403'
