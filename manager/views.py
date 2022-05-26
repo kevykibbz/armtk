@@ -332,7 +332,7 @@ def editMainOrder(request,id):
 
 #editOrder
 @method_decorator(login_required(login_url='/'),name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['admins','primary','secondary']),name='dispatch')
+@method_decorator(allowed_users(allowed_roles=['admins','secondary']),name='dispatch')
 class EditOrder(View):
     def get(self,request,id):
         obj=SiteConstants.objects.all()[0]
@@ -393,7 +393,7 @@ def deleteOrder(request,id):
 
 #tabulateOrder
 @method_decorator(login_required(login_url='/'),name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['admins','primary','secondary']),name='dispatch')
+@method_decorator(allowed_users(allowed_roles=['admins','secondary']),name='dispatch')
 class TabulateOrder(View):
     def get(self,request,id):
         try:
@@ -451,7 +451,7 @@ def orderSummary(request):
 
 #deleteSingleItem
 @login_required(login_url='/')
-@allowed_users(allowed_roles=['admins','primary','secondary'])
+@allowed_users(allowed_roles=['admins','secondary'])
 def deleteSingleItem(request,id):
    if request.is_ajax():
         try:
