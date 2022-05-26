@@ -31,8 +31,8 @@ AUTHENTICATION_BACKENDS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'whitenoise.runserver_nostatic',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -99,20 +99,20 @@ WSGI_APPLICATION = 'saas.wsgi.application'
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
+#          'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME':'admino',
 #     }
-# }
+#  }
 #postgres://xdpajrqtvijfka:44def245e34f9569a2a293b8ca0b6c2e8fcb9c0a897c1b9a5c5d137e0b49c4a0@ec2-34-236-94-53.compute-1.amazonaws.com:5432/df2pholl515ae7
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':env('DATABASE_NAME'),
-        'HOST':env('DATABASE_HOST'),
-        'USER':env('DATABASE_USER'),
-        'PASSWORD':env('DATABASE_PASSWORD'),
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME':env('DATABASE_NAME'),
+       'HOST':env('DATABASE_HOST'),
+       'USER':env('DATABASE_USER'),
+       'PASSWORD':env('DATABASE_PASSWORD'),
+   }
 }
 # DATABASES = {
 #    'default': 
@@ -189,18 +189,19 @@ LOGOUT_REDIRECT_URL='/'
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
+MEDIA='/media/'
 
-#STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+#STATICFILES_STORAGE=whitenoise.storage.CompressesdStaticFilesStorage
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+if DEBUG:
+    STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+else:
+    STATIC_ROOT=os.path.join(BASE_DIR,'static')
 
-#STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
-
-MEDIA='/media/'
 #MEDIA_ROOT='/home2/chillcas/chillcash.co.ke/media'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
