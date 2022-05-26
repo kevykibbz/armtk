@@ -130,22 +130,7 @@ class newUser(View):
                     user=User.objects.get(email__exact=uform.cleaned_data.get('email'))
                     ct=ContentType.objects.get_for_model(ExtendedAuthUser)
                     role=eform.cleaned_data.get('role')
-                    if 'primary' in role:
-                        if not Group.objects.filter(name='primary').exists():
-                            group=Group.objects.create(name='primary')
-                            group.user_set.add(userme)
-                            p1=Permission.objects.filter(content_type=ct).all()[0]
-                            p2=Permission.objects.filter(content_type=ct).all()[1]
-                            p3=Permission.objects.filter(content_type=ct).all()[2]
-                            group.permissions.add(p1)
-                            group.permissions.add(p2)
-                            group.permissions.add(p3)
-                            group.save()
-                        else:
-                            group=Group.objects.get(name__icontains='primary')
-                            group.user_set.add(userme)
-                            group.save()
-                    elif 'secondary' in role:
+                    if 'secondary' in role:
                         if not Group.objects.filter(name='secondary').exists():
                             group=Group.objects.create(name='secondary')
                             group.user_set.add(userme)
@@ -289,7 +274,7 @@ def passwordChange(request):
 
 #NewOrder
 @method_decorator(login_required(login_url='/'),name='dispatch')
-@method_decorator(allowed_users(allowed_roles=['admins','primary']),name='dispatch')
+@method_decorator(allowed_users(allowed_roles=['admins','secondary']),name='dispatch')
 class UserNewOrder(View):
     def get(self,request):
         obj=SiteConstants.objects.all()[0]
