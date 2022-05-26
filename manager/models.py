@@ -7,6 +7,7 @@ from manager.addons import send_email
 import random
 from django.utils.crypto import get_random_string
 from phonenumber_field.modelfields import PhoneNumberField
+from django.db.models import Max
 
 class ExtendedAdmin(models.Model):
     user=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
@@ -24,6 +25,7 @@ class ExtendedAdmin(models.Model):
 #generate random
 def generate_id():
     return get_random_string(6,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKMNOPQRSTUVWXYZ0123456789')
+
 
 @receiver(post_save, sender=ExtendedAdmin)
 def send_installation_email(sender, instance, created, **kwargs):
@@ -58,6 +60,8 @@ user_roles=[
             ('Secondary','View | Edit'),
             ('Admin','View | Edit  | Admin'),
         ]
+
+
 class ExtendedAuthUser(models.Model):
     user=models.OneToOneField(User,primary_key=True,on_delete=models.CASCADE)
     phone=PhoneNumberField(null=True,blank=True,verbose_name='phone',unique=True,max_length=13)
@@ -80,6 +84,7 @@ class ExtendedAuthUser(models.Model):
 
 
 
+
 #generate random
 def generate_serial():
     return get_random_string(12,'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKMNOPQRSTUVWXYZ0123456789')
@@ -98,7 +103,9 @@ class Oders(models.Model):
 @receiver(post_save, sender=Oders)
 def create_order_id(sender, instance, created, **kwargs):
     if created:
-        OrderFields.objects.create(order_id=instance.ordername_id)
+        op=str(instance.ordername_id).zfill(5)
+        prefix='21A'+op
+        OrderFields.objects.create(order_id=instance.ordername_id,prefix=prefix)
 
 def save_order_id(sender, instance, *args,**kwargs):
     instance.orderfields.save()
@@ -143,6 +150,7 @@ class OrderFields(models.Model):
     a_ppy=models.CharField(max_length=100,null=True,blank=True)
     customer_email=models.CharField(max_length=100,null=True,blank=True)
     notify=models.CharField(max_length=100,null=True,blank=True)
+    prefix=models.CharField(max_length=100,null=True,blank=True)
     acct_email=models.CharField(max_length=100,null=True)
     media=models.FileField(upload_to='uploads/',null=True,blank=True)
     date=models.DateField(null=True)
@@ -151,7 +159,7 @@ class OrderFields(models.Model):
     class Meta:
         db_table='orderfields'
         verbose_name_plural='orderfields'
-        ordering=('created_at',)
+        ordering=('modified_at','prefix')
     def __str__(self)->str:
         return self.order.ordername
 
@@ -159,6 +167,9 @@ class OrderFields(models.Model):
         if self.media:
             self.media.storage.delete(self.media.name)
         super().delete()
+    @property
+    def get_prefix(self):
+        return 'A21'+str(self.id).zfill(5)
 
 
 

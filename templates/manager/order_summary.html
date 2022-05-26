@@ -4,28 +4,27 @@
 {% block body %}
 <section class="content">
     <div class="">
-        <div class="block-header">
-            <div class="row">
-                <div class="col-lg-7 col-md-6 col-sm-12">
-                    <h2>All Orders</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
-                        <li class="breadcrumb-item active">Order summary</li>
-                    </ul>
-                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-12">                
-                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
-                    {% if data.extendedauthuser.role != 'Tertiary' %}
-                        <a href="{% url 'userorder' %}" data-toggle="tooltip" title="New order" class="btn btn-info btn-icon float-right " type="button"><i class="zmdi zmdi-plus"></i>New</a>
-                        <a href="{% url 'view orders' %}" data-toggle="tooltip" title="Update order" class="btn btn-secondary btn-icon float-right " type="button"><i class="zmdi zmdi-edit"></i> Update</a>
-                    {% endif %}
-                   
-                </div>
+        <div class="container-fluid">
+                <div class="block-header">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-6 col-sm-12">
+                            <h2>All Orders</h2>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
+                                <li class="breadcrumb-item active">Order summary</li>
+                            </ul>
+                            <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                        </div>
+                        <div class="col-lg-5 col-md-6 col-sm-12">                
+                            <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                            {% if data.extendedauthuser.role != 'Tertiary' %}
+                                <a href="{% url 'userorder' %}" data-toggle="tooltip" title="New order" class="btn btn-info btn-icon float-right " type="button"><i class="zmdi zmdi-plus"></i>New</a>
+                                <a href="{% url 'view orders' %}" data-toggle="tooltip" title="Update order" class="btn btn-secondary btn-icon float-right " type="button"><i class="zmdi zmdi-edit"></i> Update</a>
+                            {% endif %}
+                           
+                        </div>
+                    </div>
             </div>
-        </div>
-        
-        <div class="container">
             <div class="row clearfix">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="card project_list">
@@ -35,6 +34,7 @@
                                 <thead>
                                     <tr>                                       
                                         <th>#</th>
+                                        <th>Action</th>
                                         <th>Load</th>
                                         <th>Status</th>
                                         <th>Date</th>                                        
@@ -65,10 +65,9 @@
                                         <th>Customer email</th>
                                         <th>Notify</th>
                                         <th>Acct email</th>
+                                        <th>File</th>
                                         <th>Modified on</th>
                                         <th>Created on</th>
-                                        <th>File</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,7 +75,20 @@
                                      {% for item in orders %}
                                      <tr id="id_{{item.id}}">
                                         <td>{{forloop.counter}}.</td>
-                                        <td>{% if item.load %}#{{item.load}}{% else %} No data {% endif %}</td>
+                                        <td>
+                                            {% if data.extendedauthuser.role != 'Tertiary' %}
+                                                <a href="{% url 'edit order' id=item.id %}" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
+                                                {% if data.is_superuser %}
+                                                <a data-host="{% url 'order summary' %}" href="{% url 'delete single order item' id=item.id %}" data-toggle="tooltip" title="Delete order item" class="del-data btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
+                                                {% else %}
+                                                    <a href="javascript:void(0)"data-toggle="tooltip" title="Delete order item" class="btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
+                                                {% endif %}
+                                            {% else %}
+                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
+                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete order item"  class="btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>21A{{forloop.counter|stringformat:"05d"}}</td>
                                         <td>
                                             {% if item.status %}
                                                 {% if item.status == 'cancelled_pickup' %}
@@ -126,25 +138,16 @@
                                         <td>{% if item.customer_email %}{{item.customer_email}}{% else %} No data {% endif %}</td>
                                         <td>{% if item.notify %}{{item.notify }}{% else %} No data {% endif %}</td>
                                         <td>{% if item.acct_email %}{{item.acct_email}}{% else %} No data {% endif %}</td>
-                                        <td>{% if item.modified_at %}{{item.modified_at}}{% else %} No data {% endif %}</td>
-                                        <td>{% if item.created_at %}{{item.created_at}}{% else %} No data {% endif %}</td>
-                                        <td>
-                                            {% if item.media.url %}
+                                        <td class="text-center">
+                                            {% if item.media %}
                                                 <a href="/media{{item.media.url}}"  target="_blank" data-toggle="tooltip" title="View file" class="btn btn-info btn-icon "><i class="zmdi zmdi-eye"></i></a> |
                                                 <a  href="/media{{item.media.url}}" data-toggle="tooltip" title="Download file" class="btn btn-outline-success btn-icon" download><i class="zmdi zmdi-download"></i></a>
                                             {% else %}
                                                 No file found
                                             {% endif %}
                                         </td>
-                                        <td>
-                                            {% if data.extendedauthuser.role != 'Tertiary' %}
-                                                <a href="{% url 'edit order' id=item.id %}" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
-                                                <a data-host="{% url 'order summary' %}" href="{% url 'delete single order item' id=item.id %}" data-toggle="tooltip" title="Delete order item" class="del-data btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
-                                            {% else %}
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
-                                                <a href="javascript:void(0)" data-toggle="tooltip" title="Delete order item" class="zbtn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
-                                            {% endif %}
-                                        </td>
+                                        <td>{% if item.modified_at %}{{item.modified_at}}{% else %} No data {% endif %}</td>
+                                        <td>{% if item.created_at %}{{item.created_at}}{% else %} No data {% endif %}</td>
                                      </tr>
                                      {% endfor %}
                                     {% else %}

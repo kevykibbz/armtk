@@ -22,7 +22,7 @@ import re
 from .search import *
 import datetime
 from django.contrib.humanize.templatetags.humanize import intcomma
-
+from django.template.defaulttags import register
 
 
 @method_decorator(unauthenticated_user,name='dispatch')
@@ -130,7 +130,7 @@ class newUser(View):
                     user=User.objects.get(email__exact=uform.cleaned_data.get('email'))
                     ct=ContentType.objects.get_for_model(ExtendedAuthUser)
                     role=eform.cleaned_data.get('role')
-                    if 'secondary' in role:
+                    if 'Secondary' in role:
                         if not Group.objects.filter(name='secondary').exists():
                             group=Group.objects.create(name='secondary')
                             group.user_set.add(userme)
@@ -143,7 +143,7 @@ class newUser(View):
                             group=Group.objects.get(name__icontains='secondary')
                             group.user_set.add(userme)
                             group.save()
-                    elif 'tertiary' in role:
+                    elif 'Tertiary' in role:
                         if not Group.objects.filter(name='tertiary').exists():
                             group=Group.objects.create(name='tertiary')
                             group.user_set.add(userme)
@@ -341,7 +341,7 @@ class EditOrder(View):
         form=OrderFieldsForm(instance=data)
         customers=OrderFields.objects.all()
         data={
-            'title':'View orders',
+            'title':f'Edit oreder | {obj.ordername}',
             'obj':obj,
             'data':request.user,
             'form':form,
@@ -403,7 +403,7 @@ class TabulateOrder(View):
             form=OrderFieldsForm()
             customers=OrderFields.objects.all()
             data={
-                'title':f'Tabulate order | {orders.ordername}',
+                'title':f'Edit order | {orders.ordername}',
                 'obj':obj,
                 'data':request.user,
                 'editor':orders,
@@ -424,10 +424,10 @@ class TabulateOrder(View):
         else:
             return JsonResponse({'valid':False,'form_errors':form.errors},content_type='application/json')
 
-@property
-def photo_url(self):
-    if self.media and hasattr(self.media,'url'):
-        return self.media.url
+@register.filter
+def sort_prefix(item):
+    print(item)
+    
 
 #orderSummary
 @login_required(login_url='/')

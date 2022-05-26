@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY =env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.43.253']
 ALLOWED_HOSTS = ['armlogi.herokuapp.com','127.0.0.1','localhost']
@@ -114,16 +114,17 @@ DATABASES = {
        'PASSWORD':env('DATABASE_PASSWORD'),
    }
 }
+
 # DATABASES = {
 #    'default': 
 #             {
 
 #                 'ENGINE': 'mysql.connector.django',
-#                 'NAME':env('DATABASE_NAME'),
-#                 'USER':env('DATABASE_USER'),
-#                 'PASSWORD':env('DATABASE_PASSWORD'),
-#                  'HOST':env('DATABASE_HOST'),
-#                 'PORT':env('DATABASE_PORT'),
+#                 'NAME':'admino',
+#                 'USER':'root',
+#                 'PASSWORD':'',
+#                 'HOST':'localhost',
+#                 'PORT':3306,
 #                 'OPTIONS':
 #                 {
 #                     'autocommit':True,

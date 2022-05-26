@@ -10,6 +10,7 @@
                     <h2>View orders</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a  href="{% url 'home' %}"><i class="zmdi zmdi-home"></i> {{site_name}}</a></li>
+                        <li class="breadcrumb-item "><a href="{% url 'order summary' %}">order summary</a></li>
                         <li class="breadcrumb-item active">View orders</li>
                     </ul>
                     <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
@@ -35,12 +36,16 @@
                                 <div class="col-7">
                                     <span class="badge badge-info counter-wrapper">{{forloop.counter}}</span> <span class="text-capitalize card-contenter"><a href="{% url 'order summary'%}">{{order.ordername}}</a></span>
                                 </div>
-                                {% if data.is_superuser %}
                                 <div class="buttons col-5 float-right"  style="display:none">
+                                    {% if data.extendedauthuser.role != 'Tertiary' %}
                                     <a  data-toggle="modal" data-target="#editModal" type="button" href="{% url 'edit main order' id=order.ordername_id %}" class="btn btn-success btn-icon editorderbtn" type="button"><i class="zmdi zmdi-edit"></i></a>
+                                    {% if data.is_superuser %}
                                     <a  data-host="{% url 'view orders'%}" href="{% url 'delete order' id=order.ordername_id %}" class="del-data btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
+                                    {% else %}
+                                     <a href="javascript:void(0)" class="btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
+                                    {% endif %}
+                                    {% endif %}
                                 </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
