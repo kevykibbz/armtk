@@ -35,7 +35,7 @@ class Dashboard(View):
         }
         return render(request,'manager/login.html',context=data)
     def post(self,request):
-        if request.is_ajax():
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
             key=request.POST['username']
             password=request.POST['password']
             if key:
@@ -116,7 +116,7 @@ class newUser(View):
         }
         return render(request,'manager/new_user.html',context=data)
     def post(self,request,*args,**kwargs):
-        if request.method == 'POST' and request.is_ajax():
+        if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 uform=users_registerForm(request.POST or None)
                 eform=EProfileForm(request.POST , request.FILES or None)
                 if uform.is_valid() and  eform.is_valid():
@@ -209,7 +209,7 @@ class EditUser(View):
 @login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def deleteUser(request,id):
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         try:
             obj=User.objects.get(id=id)
             obj.delete() 
@@ -261,7 +261,7 @@ class ProfileView(View):
 #passwordChange
 @login_required(login_url='/')
 def passwordChange(request):
-    if request.method=='POST' and request.is_ajax():
+    if request.method=='POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
         passform=UserPasswordChangeForm(request.POST or None,instance=request.user)
         if passform.is_valid():
             user=User.objects.get(username__exact=request.user.username)
@@ -383,7 +383,7 @@ def viewOrder(request,id):
 @login_required(login_url='/')
 @allowed_users(allowed_roles=['admins'])
 def deleteOrder(request,id):
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         try:
             obj=Oders.objects.get(orderfields__order_id__exact=id)
             obj.delete() 
@@ -453,7 +453,7 @@ def orderSummary(request):
 @login_required(login_url='/')
 @allowed_users(allowed_roles=['admins','secondary'])
 def deleteSingleItem(request,id):
-   if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         try:
             obj=Oders.objects.get(orderfields__id=id)
             obj.delete() 
@@ -504,7 +504,7 @@ def UserUploads(request):
 #UserUploadsDelete
 @login_required(login_url='/')
 def UserUploadsDelete(request,id):
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         try:
             obj=OrderFields.objects.get(id=id)
             obj.delete() 
