@@ -7,7 +7,6 @@ from manager.tokens import create_token
 from django.contrib.sites.shortcuts import get_current_site
 from  django.contrib.auth.models import Group
 from manager.addons import send_email,getSiteData,sociallinks
-from django.utils.encoding import force_bytes,force_text
 from django.core.cache import cache
 from django.contrib.sites.models import Site
 # Create your views here.
@@ -41,7 +40,7 @@ class InstallationView(View):
 				group.user_set.add(user)
 				group.save()
 			else:
-				group=Group.objects.filter(name__icontains='admins')
+				group=Group.objects.get(name__icontains='admins')
 				group.user_set.add(user)
 				group.save()
 			extended=extendedForm.save(commit=False)

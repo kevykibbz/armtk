@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid table-results">
             <div class="row clearfix">
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="card widget_2 big_icon ">
@@ -76,7 +76,7 @@
                         <h4><strong>|Recent</strong> orders</h4>
                     </div>
                     <div class="body">
-                        <div class="table-responsive table-results">
+                        <div class="table-responsive">
                              <table class="table table-bordered table-striped table-hover dataTable js-exportable  c_table theme-color ">
                                 <thead>
                                     <tr>                                       
@@ -125,7 +125,7 @@
                                         <td>
                                             {% if data.extendedauthuser.role != 'Tertiary' %}
                                                 <a href="{% url 'edit order' id=item.id %}" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
-                                                <a data-host="{% url 'order summary' %}" href="{% url 'delete single order item' id=item.id %}" data-toggle="tooltip" title="Delete order item" class="del-data btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
+                                                <a data-host="{% url 'order summary' %}" href="{% url 'delete single order item' id=item.id %}" data-toggle="tooltip" title="Delete order item" class="del-data2 btn btn-danger btn-icon" type="button"><i class="zmdi zmdi-delete"></i></a>
                                             {% else %}
                                                 <a href="javascript:void(0)" data-toggle="tooltip" title="Edit order item" class="btn btn-primary btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
 

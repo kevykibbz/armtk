@@ -71,7 +71,7 @@
                                         </td>
                                         <td>{{user.date_joined}}</td>
                                         <td>
-                                            {% if user.extendedauthuser.role == 'Admin' %}
+                                            {% if user.is_superuser %}
                                             <a  href="{% url 'user profile' username=user.username %}" class="btn btn-success btn-icon " type="button"><i class="zmdi zmdi-edit"></i></a>
                                             <a  href="javascript:void(0)" class=" btn btn-danger btn-icon " type="button"><i class="zmdi zmdi-delete"></i></a>
                                             {% else %}

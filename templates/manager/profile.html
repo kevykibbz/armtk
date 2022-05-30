@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="body">
-                            <form action="{% url 'user profile' username=user.username %}" method="post" class="regForm" novalidate>
+                            <form action="{% url 'user profile' username=user.username %}" method="post" class="profForm" novalidate>
                                 {% csrf_token %}
                                 {{eform.profile_pic}}
                                 <div class="row">

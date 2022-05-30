@@ -253,7 +253,7 @@ class ProfileView(View):
         if form.is_valid() and eform.is_valid():
             form.save()
             eform.save()
-            return JsonResponse({'valid':True,'message':'data saved'},content_type='application/json')
+            return JsonResponse({'valid':True,'message':'data saved','profile_pic':True},content_type='application/json')
         else:
             return JsonResponse({'valid':False,'uform_errors':form.errors,'eform_errors':eform.errors,},content_type='application/json')
 

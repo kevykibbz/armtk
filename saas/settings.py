@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY =env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = ['192.168.43.253']
 ALLOWED_HOSTS = ['armlogi.herokuapp.com','127.0.0.1','localhost']
@@ -95,6 +95,7 @@ DATABASES = {
     "default": {
         "ENGINE": "djongo",
         "NAME":env('MONGO_DB_NAME'),
+        "ENFORCE-SCHEMA":False,
         "CLIENT": {
             "host":env('MONGO_DB_HOST'),
             "port": 27017,
@@ -108,6 +109,14 @@ DATABASES = {
 #     'default': {
 #          'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME':'admino',
+#     }
+#  }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME':'admino',
+#         'ENFORCE-SCHEMA':False,
 #     }
 #  }
 #postgres://xdpajrqtvijfka:44def245e34f9569a2a293b8ca0b6c2e8fcb9c0a897c1b9a5c5d137e0b49c4a0@ec2-34-236-94-53.compute-1.amazonaws.com:5432/df2pholl515ae7
@@ -180,7 +189,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kolkata'
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
